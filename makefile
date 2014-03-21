@@ -13,6 +13,9 @@ FLAGS=-std=c++0x -Wall
 # make all: Compilar todos los programas 
 all: $(patsubst $(SRC)/%.cpp, $(BIN)/%, $(wildcard $(SRC)/*.cpp))
 
+$(BIN)/%: $(SRC)/%.cpp
+	g++ $< -o $@ $(FLAGS)
+
 
 # Limpieza de los ejecutables
 clean:
