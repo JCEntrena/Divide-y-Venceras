@@ -21,9 +21,9 @@ int suma_dividida(vit inicio, vit final) {
         return *inicio;
     else {
         vit mitad(inicio);
-        
+
         // std::distance y std::advance son constantes para iteradores 
-        // "Random Access", lineales en otro caso
+        // "Random Access", que son los que usa std::vector
         std::advance(mitad, std::distance(inicio, final)/2);
         int suma_der = suma_dividida (inicio, mitad);
         int suma_izq = mitad < final ? suma_dividida (++mitad, final) : 0;
