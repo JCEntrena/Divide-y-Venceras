@@ -1,0 +1,10 @@
+# Latex
+*.log
+*.aux
+*.pdf
+*.toc
+*.synctex.gz
+
+#Archivos de respaldo
+*~
+*fuse_hidden*   
