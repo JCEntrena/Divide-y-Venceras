@@ -19,10 +19,12 @@ class Array
         j -= 1
       else
         self[i],self[j] = self[j],self[i]
+        i += 1
+        j -= 1
       end
     end
 
-    self[i],self[j] = self[j],self[i]
+    first,self[j] = self[j],first
 
     # Estudiamos si el pivote es el elemento buscado.
     # Buscamos en el subarray correspondiente.
