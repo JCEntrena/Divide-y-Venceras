@@ -1,6 +1,6 @@
 {-
-  Sea un grupo abeliano (A,f) para el que z es un elemento neutro. 
-  Es decir, tenemos que: (f a b) = (f b a), y además, (f z a) = a. 
+  Sea un monoide (A,f) para el que z es un elemento neutro. 
+  Es decir, tenemos que: (f a (f b c)) = (f (f a b) c), y además, (f z a) = a. 
   Para comprimir una lista, podemos comprimir cada una de las mitades de la lista y unirlas.
   Usamos la técnica Divide y Vencerás.
 -}
