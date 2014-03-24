@@ -18,15 +18,11 @@ class Array
       elsif self[j] > pivote
         j -= 1
       else
-        temp = self[i]
-        self[i] = self[j]
-        self[j] = temp
+        self[i],self[j] = self[j],self[i]
       end
     end
 
-    temp = self[i]
-    self[i] = self[0]
-    self[0] = temp
+    self[i],self[j] = self[j],self[i]
 
     # Estudiamos si el pivote es el elemento buscado.
     # Buscamos en el subarray correspondiente.
