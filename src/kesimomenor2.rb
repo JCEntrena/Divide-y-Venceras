@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
 #encoding utf8
 
 # Creo que es eficiencia O(n**2) en el peor caso y O(n) en el medio.
@@ -15,7 +16,7 @@ class Array
       if self[i] < pivote
         i += 1
       elsif self[j] > pivote
-        j += 1
+        j -= 1
       else
         temp = self[i]
         self[i] = self[j]
@@ -37,4 +38,15 @@ class Array
       return self[0..i-1].kesimo(k)
     end
   end
+end
+
+
+if __FILE__ == $0
+  puts "Introduce array: "
+  line = gets.chomp
+  array = line.split.map(&:to_i)
+
+  puts "Introduce k: "
+  k = (gets.chomp).to_i
+  puts "k-ésimo elemento: #{array.kesimo(k)}"
 end
