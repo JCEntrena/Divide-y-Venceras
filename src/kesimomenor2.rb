@@ -6,35 +6,21 @@
 
 class Array
   def kesimo (k)
-    pivote = self.first
-
     # Esto tiene eficiencia O(n).
     # Partimos la lista en dos, sobre un pivote.
-    i = 1
-    j = size - 1
-    while i < j do
-      if self[i] < pivote
-        i += 1
-      elsif self[j] > pivote
-        j -= 1
-      else
-        self[i],self[j] = self[j],self[i]
-        i += 1
-        j -= 1
-      end
-    end
-
-    # Lleva el pivote a su sitio.
-    first,self[j] = self[j],first
+    pivote = self.first
+    menores = self.select { |x| x < pivote }
+    mayores = self.select { |x| x > pivote }
+    iguales = self.select { |x| x == pivote }
 
     # Estudiamos si el pivote es el elemento buscado.
     # Buscamos en el subarray correspondiente.
-    if j == k
-      return self[j]
-    elsif j < k
-      return self[j+1..size-1].kesimo(k-j-1)
+    if k < menores.size
+      return menores.kesimo (k)
+    elsif k < menores.size + iguales.size
+      return pivote
     else
-      return self[0..j-1].kesimo(k)
+      return mayores.kesimo (k - menores.size - iguales.size)
     end
   end
 end
