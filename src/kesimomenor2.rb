@@ -13,9 +13,9 @@ class Array
     j = size - 1
     while i < j do
       if self[i] < pivote
-        i++
+        i += 1
       elsif self[j] > pivote
-        j--
+        j += 1
       else
         temp = self[i]
         self[i] = self[j]
