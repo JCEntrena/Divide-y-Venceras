@@ -3,6 +3,7 @@
 
 def MultiplicaDV (x,y):
     length = x.bit_length() if x.bit_length() > y.bit_length() else y.bit_length()
+
     if (length < 2):
         return x*y
     else:
@@ -10,8 +11,10 @@ def MultiplicaDV (x,y):
         b = x % (1 << length/2)
         c = y >> length/2
         d = y % (1 << length/2)  
+
         ac = MultiplicaDV (a,c)
         bd = MultiplicaDV (b,d)
+
         return  ((ac << (length/2*2)) + 
                 #((MultiplicaDV(a-b,d-c) + ac + bd) << length/2) +
                 (((a-b)*(d-c) + ac + bd) << length/2) +
