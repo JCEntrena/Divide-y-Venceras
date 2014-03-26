@@ -23,7 +23,7 @@ class Array
     elsif k < particion_iguales
       return pivote
     else
-      return mayores.kesimo (k - menores.size - iguales.size)
+      return mayores.kesimo (k - particion_iguales)
     end
   end
 end

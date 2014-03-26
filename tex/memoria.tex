@@ -108,6 +108,20 @@ Divide y vencerás} % Subtitle
 \pagebreak
 
 \section {Suma de $n$ números}
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{v}, lista de $n$ números\\
+     	\IF{$n$==1}
+	  \RETURN {\texttt{v[0]}}
+	\ELSE
+	  \RETURN {\texttt{Suma(\{v[1]\ldots v[n/2]\}) + Suma (\{v[n/2+1]\ldots v[n]\})}}
+    	\ENDIF \\\
+	\end{algorithmic}
+    \caption{Suma de $n$ números}
+    \label{suma}
+\end{algorithm}
+
 \section {Multiplicación de números grandes (adaptado a binario)}
 
 Llamamos longitud en bits de un número entero positivo $x=x_{n}x_{n-1}\ldots x_1)_b \quad \\ x_i \in \{0,1\}$
@@ -121,8 +135,8 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
      	\IF{\texttt{longitud} $<$ 2}
      		\RETURN{$x\cdot y$}
     	\ELSE
-	  \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}}
-	  \STATE{\texttt{(b,d):= $\left\lfloor \frac{n}{2}\right\rfloor$} bits inferiores de \texttt{(x,y)}}
+	  \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}\\
+		 \texttt{(b,d):= $\left\lfloor \frac{n}{2}\right\rfloor$} bits inferiores de \texttt{(x,y)}}
 	  \STATE{Calculamos \texttt{a$\cdot$c} y \texttt{b$\cdot$d} llamando recursivamente al algoritmo}
 	  \ENDIF \\\
     	\RETURN{$ac\cdot 2^{\left\lceil n/2 \right\rceil \cdot 2} +[(a-b)\cdot(d-c) +ac +bd]\cdot \left\lfloor n/2\right\rfloor + bd$}
@@ -131,7 +145,30 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
     \label{multiplicacion}
 \end{algorithm}
 
-\section {K-ésimo menor elemento de un vector}
+\section {$K$-ésimo menor elemento de un vector}
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{v}, vector de números\\
+        	\texttt{k}, entero postivo\\\
+     	\STATE{\texttt{pivote$\leftarrow$ v[0]}}     	
+	\STATE{Definimos:\\
+	      \texttt{menores}=$\{x\in v : x<pivote\}$\\
+	      \texttt{iguales}=$\{x\in v : x=pivote\}$\\
+	      \texttt{mayores}=$\{x\in v : x>pivote\}$}
+	\\\
+    	\IF{\texttt{k<\#menores}}
+	  \RETURN {\texttt{k-ésimo(menores,k)}}
+	\ELSIF{\texttt{k<[\#menores+\#iguales]}}
+	  \RETURN {pivote}
+	\ELSE
+	  \RETURN {\texttt{k-ésimo(mayores,k-[\#menores+\#iguales])}}
+	\ENDIF
+	\end{algorithmic}
+    \caption{$k$-ésimo menor elemento de un vector}
+    \label{kesimo}
+\end{algorithm}
+
 \section {Elemento mayoritario}
 \section {Tornillos y tuercas}
 \section {Compraventa de acciones}
