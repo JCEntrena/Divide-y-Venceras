@@ -128,7 +128,7 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
     	\RETURN{$ac\cdot 2^{\left\lceil n/2 \right\rceil \cdot 2} +[(a-b)\cdot(d-c) +ac +bd]\cdot \left\lfloor n/2\right\rfloor + bd$}
 	\end{algorithmic}
     \caption{Multiplicación de números grandes}
-    \label{multiplicacion}
+    \label{algoritmo}
 \end{algorithm}
 
 \section {K-ésimo menor elemento de un vector}
