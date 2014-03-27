@@ -146,6 +146,15 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
 \end{algorithm}
 
 \section {$K$-ésimo menor elemento de un vector}
+\subsection{Algoritmo}
+  Nos basaremos en una idea similar a la usada para el algoritmo de ordenación \textit{Quicksort}.
+  Seleccionaremos un elemento pivote y dividiremos la lista en dos partes, una con los elementos menores
+  a él y otra con los elementos mayores que él. Así el pivote quedará en su posición ordenada. Si ésta es
+  la posición $k$, habremos acabado; en otro caso, sólo tendremos que buscar recursivamente sobre la 
+  sublista de elementos mayores, si el índice es menor que $k$, o la sublista de elementos menores, si el
+  índice es mayor que $k$.
+  
+
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\REQUIRE \ \\
@@ -170,7 +179,9 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
 \end{algorithm}
 
 \section {Elemento mayoritario}
-Se denomina \textit{elemento mayoritario} de una lista a aquel que aparece más de $n/2$ veces, donde $n$ es el tamaño de la lista. El problema reside en eliminar la necesidad de contar todas las ocurrencias de cada uno de los elementos, de forma que podamos conocer el mayoritario más eficientemente. Para ello, utilizaremos la siguiente estrategia:
+Se denomina \textit{elemento mayoritario} de una lista a aquel que aparece más de $n/2$ veces, donde $n$ es el tamaño de la lista.
+El problema reside en eliminar la necesidad de contar todas las ocurrencias de cada uno de los elementos, de forma que podamos conocer el mayoritario más eficientemente.
+Para ello, utilizaremos la siguiente estrategia:
 
 \begin{itemize}
 \item Tomamos parejas de elementos consecutivos en la lista.
