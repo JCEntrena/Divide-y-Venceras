@@ -108,6 +108,7 @@ Divide y vencerás} % Subtitle
 \pagebreak
 
 \section {Suma de $n$ números}
+\subsection{Algoritmo}
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\REQUIRE \ \\
@@ -122,8 +123,35 @@ Divide y vencerás} % Subtitle
     \label{suma}
 \end{algorithm}
 
-\section {Multiplicación de números grandes (adaptado a binario)}
+\subsection{Análisis de eficiencia}
+El algoritmo responde a una recurrencia de la forma:
+\begin{equation}
+ T(n)=\left\lbrace
+	    \begin{array}{lr}
+            1 & n=1\\
+            2\cdot T\left(\frac{n}{2}\right) & n>1\\
+            \end{array}
+	    \right.
+\end{equation}
 
+Resolviendo la recurrencia, tenemos:
+\begin{equation}
+ T(n)=n\quad \forall n\in \mathbb{N}
+\end{equation}
+
+Es claro que al tener que recorrer todas las componentes (es necesario leer las posiciones
+del vector, para poder sumarlas), el mejor algoritmo que se puede ejecutar en un único core 
+será de complejidad $\mathbb{O}(n)$. En el caso de un único core, por tanto, no supone ninguna
+mejora el realizar el algoritmo Divide y Vencerás; más aún, este algoritmo será más lento que el
+iterativo, por la necesidad de crear marcos de pila nuevos para cada llamada a la función\\
+Para un procesador vectorial (SIMD), de nuevo encontramos que el algoritmo iterativo convencional
+(recorrer todo el vector e ir acumulando en una variable suma) sería más eficiente que el Divide y Vencerás.
+Únicamente encontraríamos mejora si el computador fuese de tipo MIMD, ya que en dicho caso podríamos crear
+varias hebras y que cada una de ellas se ocupara de atender una llamada a la recurrencia en un procesador distinto.
+
+
+\section {Multiplicación de números grandes (adaptado a binario)}
+\subsection{Algoritmo}
 Llamamos longitud en bits de un número entero positivo $x=x_{n}x_{n-1}\ldots x_1)_b \quad \\ x_i \in \{0,1\}$
 a $\max\{i\in \{1\ldots n\} : x_i = 1\}$ 
 \begin{algorithm}[H]
@@ -144,6 +172,8 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
     \caption{Multiplicación de números grandes}
     \label{multiplicacion}
 \end{algorithm}
+
+\subsection{Análisis de eficiencia}
 
 \section {$K$-ésimo menor elemento de un vector}
   \subsection{Algoritmo}
