@@ -1,7 +1,9 @@
-#!/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 def MultiplicaDV (x,y):
+    signo = 1 if x<0 and y<0 or x>=0 and y>=0 else -1
+    x,y = abs(x),abs(y)
     length = x.bit_length() if x.bit_length() > y.bit_length() else y.bit_length()
 
     if (length < 2):
@@ -18,7 +20,7 @@ def MultiplicaDV (x,y):
         return  ((ac << (length/2*2)) + 
                 #((MultiplicaDV(a-b,d-c) + ac + bd) << length/2) +
                 (((a-b)*(d-c) + ac + bd) << length/2) +
-                bd)
+                bd)*signo
     
 
 x = input ("Primer número: ")
