@@ -332,13 +332,20 @@ Efectivamente, esta estrategia nos asegura que, de existir un elemento mayoritar
 Además, al igual que en el caso de la búsqueda del $K$-ésimo menor elemento, podemos mejorar la eficiencia del algoritmo usando el algoritmo ~\ref{median-of-medians} para la elección del pivote.
 
 \section {Compraventa de acciones}
-	Tenemos un array con valores numéricos (que suponemos double) y queremos calcular la mayor diferencia entre dos elementos a y b, esto es, maximizar b-a, con la condición de que la posición de b sea mayor que la de a. 
+	% (Comentario Mario)
+	% ¿Necesitamos suponerlos double? De hecho, con que sean datos donde haya definida relación de orden...
+	Tenemos un array con valores numéricos (que suponemos double) y queremos calcular la mayor diferencia entre dos elementos a y b, 
+	esto es, maximizar b-a, con la condición de que la posición de b sea mayor que la de a. 
 	
-	Para ello vamos a utilizar un algoritmo recursivo. La idea de este algoritmo es la siguiente: Calculamos el mínimo y el máximo del vector. Si el mínimo está antes que el máximo, hemos terminado, solo queda devolver sus posiciones. Si no es así, el vector queda dividido en tres partes: Inicio-Máximo, Máximo+1-Minimo-1, y Mínimo-Final. En los trozos de los extremos podemos calcular la ganancia directamente (calculando un mínimo en la primera y un máximo en la última), y para el trozo restante llamamos a la función de forma recursiva. Después hay que comprobar cuál es el óptimo y quedarnos con su solución. 
+	Para ello vamos a utilizar un algoritmo recursivo. La idea de este algoritmo es la siguiente: Calculamos el mínimo y el máximo del 
+	vector. Si el mínimo está antes que el máximo, hemos terminado, solo queda devolver sus posiciones. Si no es así, el vector queda 
+	dividido en tres partes: Inicio-Máximo, Máximo+1-Minimo-1, y Mínimo-Final. En los trozos de los extremos podemos calcular la ganancia 
+	directamente (calculando un mínimo en la primera y un máximo en la última), y para el trozo restante llamamos a la función de forma 
+	recursiva. Después hay que comprobar cuál es el óptimo y quedarnos con su solución. 
 	
-	(Comentario de JC)
-	He decidido comprobar que el vector no esté ordenado de mayor a menor desde el principio, ya que facilita mucho las cosas. De todas formas no sé si este algoritmo es óptimo, así que echadle un vistazo. 
-
+	%(Comentario de JC)
+	% He decidido comprobar que el vector no esté ordenado de mayor a menor desde el principio, ya que facilita mucho las cosas. De todas formas no sé si este algoritmo es óptimo, así que echadle un vistazo. 
+	
 
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
