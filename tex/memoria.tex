@@ -204,6 +204,15 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
       \label{median-of-medians}
     \end{algorithm}
 
+  \subsection{Análisis de eficiencia.}
+    \subsubsection{Elección arbitraria del pivote.}
+      El algoritmo realiza una partición alrededor del pivote en tiempo $\mathbb{O}(n)$ y pasa a aplicar el algoritmo
+      en uno de los dos lados de la lista dividida. Cada uno tendrá tanta posibilidad de ser elegido como elementos tenga,
+      por lo que podemos considerar:
+      \begin{equation}
+	T(n) = n + \frac{1}{n}\left( \right)
+      \end{equation}
+
 
 \section {Elemento mayoritario}
 Se denomina \textit{elemento mayoritario} de una lista a aquel que aparece más de $n/2$ veces, donde $n$ es el tamaño de la lista.
