@@ -141,7 +141,7 @@ Resolviendo la recurrencia, tenemos:
 
 Es claro que al tener que recorrer todas las componentes (es necesario leer las posiciones
 del vector, para poder sumarlas), el mejor algoritmo que se puede ejecutar en un único core 
-será de complejidad $\mathbb{O}(n)$. En el caso de un único core, por tanto, no supone ninguna
+será de complejidad $\mathcal{O}(n)$. En el caso de un único core, por tanto, no supone ninguna
 mejora el realizar el algoritmo Divide y Vencerás; más aún, este algoritmo será más lento que el
 iterativo, por la necesidad de crear marcos de pila nuevos para cada llamada a la función\\
 Para un procesador vectorial (SIMD), de nuevo encontramos que el algoritmo iterativo convencional
@@ -153,27 +153,63 @@ varias hebras y que cada una de ellas se ocupara de atender una llamada a la rec
 \section {Multiplicación de números grandes (adaptado a binario)}
 \subsection{Algoritmo}
 Llamamos longitud en bits de un número entero positivo $x=x_{n}x_{n-1}\ldots x_1)_b \quad \\ x_i \in \{0,1\}$
-a $\max\{i\in \{1\ldots n\} : x_i = 1\}$ 
+a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
+Denotamos por \texttt{x $>>$ y} y \texttt{x $<<$ y} a las rotaciones a derecha e izquierda $y$ posiciones
+de los bits de un número entero $x$
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\REQUIRE \ \\
         	\texttt{x,y, números enteros positivos}\\\
-        	
+	\IF{[x<0 \AND y<0] \OR [x>0 \AND y>0] }
+	  \STATE{\texttt{signo=}1}
+	\ELSE
+	  \STATE{\texttt{signo=}-1}
+	\ENDIF\\\
+	\STATE{\texttt{(x,y):=(|x|,|y|)}}
         \STATE{\texttt{n}:= menor de las longitudes en bits de \texttt{x,y}}
+     	\\\
      	\IF{\texttt{longitud} $<$ 2}
-     		\RETURN{$x\cdot y$}
+     		\RETURN{$x\cdot y \cdot \texttt{signo}$}
     	\ELSE
 	  \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}\\
 		 \texttt{(b,d):= $\left\lfloor \frac{n}{2}\right\rfloor$} bits inferiores de \texttt{(x,y)}}
 	  \STATE{Calculamos \texttt{a$\cdot$c} y \texttt{b$\cdot$d} llamando recursivamente al algoritmo}
-	  \ENDIF \\\
-    	\RETURN{$ac\cdot 2^{\left\lceil n/2 \right\rceil \cdot 2} +[(a-b)\cdot(d-c) +ac +bd]\cdot \left\lfloor n/2\right\rfloor + bd$}
+	\ENDIF \\\
+    	\RETURN{\\\ $\bigg( ac << (\left\lceil n/2 \right\rceil \cdot 2) +
+    	\bigg[\texttt{Producto\_divide\_venceras}((a-b),(d-c)) +ac +bd\bigg]\cdot \left\lfloor n/2\right\rfloor + 
+    	bd \bigg) \cdot \texttt{signo}$
+    	}
 	\end{algorithmic}
-    \caption{Multiplicación de números grandes}
+    \caption{Algoritmo de Karatsuba}
     \label{multiplicacion}
 \end{algorithm}
 
 \subsection{Análisis de eficiencia}
+El algoritmo convencional de multiplicación de dos enteros de $n$ cifras, tiene una eficiencia de $\mathcal{O}(n^2)$
+El algoritmo sigue la siguiente recurrencia:
+\begin{equation}
+ T(n)=\left\lbrace
+	    \begin{array}{lr}
+            1 & n=1\\
+            3\cdot T\left(\frac{n}{2}\right) + M\cdot n & n>1\\
+            \end{array}
+	    \right.
+\end{equation}
+
+donde $M\in\mathbb{R}$ es una constante, y el sumando $n$ del caso $n>1$ de la recurrencia viene dado por el cálculo
+de la longitud de los números en bits, las sumas y restas que se efectúan en el algoritmo, y las rotaciones.
+
+Para resolver la recurrencia, efectuamos el cambio de variable $n=2^k$:
+\begin{equation}
+ T(2^k)=3\cdot T(2^{k-1}) + M\cdot 2^k
+\end{equation}
+y resolvemos: 
+
+\begin{equation}
+x_k=3\cdot x_{k-1}+M\cdot 2^k
+\end{equation}
+Una solución particular de la recurrencia es:
+$$A\cdot 2^k - A \cdot 2^{k-1}$$
 
 \section {$K$-ésimo menor elemento de un vector}
   \subsection{Algoritmo}
