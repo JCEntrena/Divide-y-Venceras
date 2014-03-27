@@ -149,12 +149,13 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
 \subsection{Algoritmo}
   Nos basaremos en una idea similar a la usada para el algoritmo de ordenación \textit{Quicksort}.
   Seleccionaremos un elemento pivote y dividiremos la lista en dos partes, una con los elementos menores
-  a él y otra con los elementos mayores que él. Así el pivote quedará en su posición ordenada. Si ésta es
+  a él y otra con los elementos mayores que él.
+  
+  Así, el pivote quedará en su posición ordenada. Si ésta es
   la posición $k$, habremos acabado; en otro caso, sólo tendremos que buscar recursivamente sobre la 
-  sublista de elementos mayores, si el índice es menor que $k$, o la sublista de elementos menores, si el
+  sublista de elementos mayores, si el índice es menor que $k$; o sobre la sublista de elementos menores, si el
   índice es mayor que $k$.
   
-
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\REQUIRE \ \\
@@ -168,15 +169,16 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
 	\\\
     	\IF{\texttt{k<\#menores}}
 	  \RETURN {\texttt{k-ésimo(menores,k)}}
-	\ELSIF{\texttt{k<[\#menores+\#iguales]}}
+	\ELSIF{\texttt{k<(\#menores+\#iguales)}}
 	  \RETURN {pivote}
 	\ELSE
-	  \RETURN {\texttt{k-ésimo(mayores,k-[\#menores+\#iguales])}}
+	  \RETURN {\texttt{k-ésimo(mayores,k-(\#menores+\#iguales))}}
 	\ENDIF
 	\end{algorithmic}
-    \caption{$k$-ésimo menor elemento de un vector}
+    \caption{$k$-ésimo menor elemento de un vector. Primera versión.}
     \label{kesimo}
 \end{algorithm}
+
 
 \section {Elemento mayoritario}
 Se denomina \textit{elemento mayoritario} de una lista a aquel que aparece más de $n/2$ veces, donde $n$ es el tamaño de la lista.
