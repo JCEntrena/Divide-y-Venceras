@@ -170,6 +170,54 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
 \end{algorithm}
 
 \section {Elemento mayoritario}
+Se denomina \textit{elemento mayoritario} de una lista a aquel que aparece más de $n/2$ veces, donde $n$ es el tamaño de la lista. El problema reside en eliminar la necesidad de contar todas las ocurrencias de cada uno de los elementos, de forma que podamos conocer el mayoritario más eficientemente. Para ello, utilizaremos la siguiente estrategia:
+
+\begin{itemize}
+\item Tomamos parejas de elementos consecutivos en la lista.
+\item Para cada pareja, comprobaremos cuáles tienen sus dos elementos iguales.
+\item Creamos una nueva lista con los elementos correspondientes a cada pareja de valores repetidos.
+\end{itemize}
+
+Efectivamente, esta estrategia nos asegura que, de existir un elemento mayoritario en la lista original, entonces será el elemento mayoritario de la nueva lista. Veamos por tanto el algoritmo seguido para la resolución del problema:
+
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{elem}, vector de elementos\\\
+     	\IF{\texttt{\#elem} <\ 3}
+	     	\IF{\texttt{\#elem} <\ 2 \OR \texttt{elem[0]} == \texttt{elem[1]}}
+    	 		\RETURN{\texttt{v[0]}} 
+     		\ELSE
+     			\RETURN{\texttt{NULO}}
+     		\ENDIF \\\
+     		
+     		\STATE{Crear un nuevo vector \texttt{repet}}
+     		\FORALL{\texttt{e} \textbf{en} \texttt{elem}}
+	     		\IF{\texttt{e} es el último \OR \texttt{e} == siguiente de \texttt{e}}
+		     		\STATE{Añadir \texttt{e} a \texttt{repet}}
+	     		\ENDIF
+     		\ENDFOR
+    	\ENDIF \\\
+    	\RETURN{elemento mayoritario de \texttt{repet} (llamada recursiva)}
+	\end{algorithmic}
+    \caption{Búsqueda del elemento mayoritario}
+    \label{mayoritario}
+\end{algorithm}
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{elem}, vector de elementos\\
+        	\texttt{may}, candidato a mayoritario\\\
+    	\IF{ocurrencias de \texttt{may} en \texttt{elem} >\ \#\texttt{elem}/2}
+     		\RETURN{\texttt{may}}
+     	\ELSE
+     		\RETURN{\texttt{NULO}}
+    	\ENDIF \\
+	\end{algorithmic}
+    \caption{Comprobación del elemento mayoritario}
+    \label{checkmay}
+\end{algorithm}
+
 \section {Tornillos y tuercas}
 \section {Compraventa de acciones}
 
