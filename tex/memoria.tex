@@ -184,7 +184,8 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
     es costosa. En lugar de usar la mediana, buscamos un elemento que se aproxime lo suficiente a la mediana para asegurarnos
     la mejora de eficiencia en el algoritmo.
     
-    Se propone el siguiente algoritmo de obtención del pivote:
+    Se propone como algoritmo de obtención del pivote dividir la lista en sublistas de $5$ elementos, de las que se obtendrá
+    la mediana usando cualquier algoritmo de ordenación. Sobre las medianas obtenidas, se aplica recursivamente el algoritmo.
     \begin{algorithm}[H]
       \begin{algorithmic}
 	    \REQUIRE \ \\
