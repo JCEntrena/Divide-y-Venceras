@@ -233,7 +233,7 @@ Efectivamente, esta estrategia nos asegura que, de existir un elemento mayoritar
         	\texttt{elem}, vector de elementos\\\
      	\IF{\texttt{\#elem} <\ 3}
 	     	\IF{\texttt{\#elem} <\ 2 \OR \texttt{elem[0]} == \texttt{elem[1]}}
-    	 		\RETURN{\texttt{v[0]}} 
+    	 		\RETURN{\texttt{elem[0]}} 
      		\ELSE
      			\RETURN{\texttt{NULO}}
      		\ENDIF \\\
@@ -266,6 +266,45 @@ Efectivamente, esta estrategia nos asegura que, de existir un elemento mayoritar
 \end{algorithm}
 
 \section {Tornillos y tuercas}
+    Tenemos dos listas cuyos elementos están emparejados con uno y sólo uno de los elementos de la otra lista.
+    
+    De nuevo, vamos a utilizar un procedimiento similar al usado por el \textit{Quicksort}.
+    
+    Seleccionaremos un elemento pivote de una lista y dividiremos la lista contraria en tres partes, una con los elementos menores a él, otra con los mayores, y su pareja.
+    
+    Y utilizando la pareja como pivote, dividimos la primera lista en elementos menores y mayores a la pareja(y, por tanto, al elemento que cogimos antes).
+    
+    Una vez tenemos la separación en dos partes de las dos listas, procedemos a ordenar cada una de las mitades con la mitad correspondiente de la otra lista(elementos menores al pivote con elementos menores a su pareja, y elementos mayores al pivote con elementos mayores a su pareja).
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+	  \REQUIRE \ \\
+	    \texttt{a, b, listas emparejadas de $n$ números}\\
+	  \IF{$n$==0}
+	    \RETURN {\texttt{[]}}
+	  \ELSE
+	    \STATE{\texttt{pivote$\leftarrow$ a[0]}}
+	    \STATE{Definimos:\\
+	      \texttt{pareja}=$\{y\in b : y=pivote\}$, que será único por las condiciones del problema\\
+	      \texttt{menores de b}=$\{y\in b : y<pivote\}$\\
+	      \texttt{mayores de b}=$\{y\in b : y>pivote\}$\\
+	      \texttt{menores de a}=$\{x\in a : x<pareja\}$\\
+	      \texttt{mayores de a}=$\{x\in a : x>pareja\}$\\}
+	  \IF{\#\texttt{menores de b} != 0}
+	    \STATE{\texttt{Ordenar(menores de b, menores de a)}}
+	  \ENDIF \\
+	  \IF{\#\texttt{mayores de b} != 0}
+	    \STATE{\texttt{Ordenar(mayores de b, mayores de a)}}
+	  \ENDIF \\
+	  
+	  \RETURN {\texttt{[(menores de a + pivote + mayores de a), \\ (menores de b + pareja + mayores de b)]}}
+	  \ENDIF \\\
+	\end{algorithmic}
+    \caption{Tornillos y tuercas}
+    \label{TyT}
+\end{algorithm}
+
+Además, al igual que en el caso de la búsqueda del $K$-ésimo menor elemento, podemos mejorar la eficiencia del algoritmo usando el algoritmo ~\ref{median-of-medians} para la elección del pivote.
+
 \section {Compraventa de acciones}
 
 \begin{algorithm}[H]
