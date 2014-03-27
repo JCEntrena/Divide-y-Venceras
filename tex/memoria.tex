@@ -210,8 +210,25 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
       en uno de los dos lados de la lista dividida. Cada uno tendrá tanta posibilidad de ser elegido como elementos tenga,
       por lo que podemos considerar:
       \begin{equation}
-	T(n) = n + \frac{1}{n}\left( \right)
+	T(n) = n + \frac{1}{n}\sum_{i=0}^{n-1}\left( \frac{i}{n}T(i) + \frac{n-1-i}{n}T(n-1-i) \right)
       \end{equation}
+      Reordenando y multiplicando por $n^2$ obtenemos:
+      \begin{equation}
+        n^2T(n) = n^3 + 2\sum^{n-1}_{i=1} \left( i T(i) \right)
+      \end{equation}
+      Para resolver la ecuación no homogénea, evaluamos en $n-1$ y restamos, obteniendo:
+      \begin{equation}
+        n^2T(n) = (n^2-1)T(n-1) + 3n^2 - 3n + 1
+      \end{equation}
+      Ahora consideramos $S(n) = \frac{nT(n)}{n+1}$, y obtenemos la ecuación:
+      \begin{equation}
+        S(n) = S(n-1) + 3\frac{n-1}{n+1} + \frac{1}{n} - \frac{1}{n-1}
+      \end{equation}
+      Que se puede resolver inductivamente usando la serie armónica.
+      \begin{equation}
+       
+      \end{equation}
+
 
 
 \section {Elemento mayoritario}
