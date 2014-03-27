@@ -206,6 +206,9 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
 
   \subsection{Análisis de eficiencia.}
     \subsubsection{Elección arbitraria del pivote.}
+      El caso medio del algoritmo es lineal. Puede comprobarse siguiendo un razonamiento similar al aplicado para 
+      calcular el caso medio en \textit{Quicksort}, podemos analizar su eficiencia.
+    
       El algoritmo realiza una partición alrededor del pivote en tiempo $\mathbb{O}(n)$ y pasa a aplicar el algoritmo
       en uno de los dos lados de la lista dividida. Cada uno tendrá tanta posibilidad de ser elegido como elementos tenga,
       por lo que podemos considerar:
@@ -222,14 +225,20 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
       \end{equation}
       Ahora consideramos $S(n) = \frac{nT(n)}{n+1}$, y obtenemos la ecuación:
       \begin{equation}
-        S(n) = S(n-1) + 3\frac{n-1}{n+1} + \frac{1}{n} - \frac{1}{n-1}
+        S(n) = S(n-1) + 3\frac{n-1}{n+1} + \frac{1}{n} - \frac{1}{n-1} \\
       \end{equation}
       Que se puede resolver inductivamente usando la serie armónica.
       \begin{equation}
-       
+        S(n) = \sum_{i=1}^n{\left( 3 - \frac{6}{i-1} + \frac{1}{i} - \frac{1}{i-1} \right)} = \mathbb{O}(n) - \mathbb{O}(log(n)) + 1 - \frac{1}{n-1} = \mathbb{O}(n)
+      \end{equation}
+      De donde despejamos de nuevo $T(n)$ como:
+      \begin{equation}
+        T(n) =  \mathbb{O}(n)
       \end{equation}
 
-
+      Sin embargo, el caso peor con elección arbitraria es $\mathbb{O}(n^2)$. Trivialmente, escogiendo a cada paso el mínimo de los elementos restantes como pivote
+      mientras que buscamos el elemento máximo de la lista, nos lleva a aplicar la partición $n$ veces, cada una de ellas con coste $\mathbb{O}(n)$.
+    
 
 \section {Elemento mayoritario}
 Se denomina \textit{elemento mayoritario} de una lista a aquel que aparece más de $n/2$ veces, donde $n$ es el tamaño de la lista.
