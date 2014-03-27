@@ -146,38 +146,62 @@ a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
 \end{algorithm}
 
 \section {$K$-ésimo menor elemento de un vector}
-\subsection{Algoritmo}
-  Nos basaremos en una idea similar a la usada para el algoritmo de ordenación \textit{Quicksort}.
-  Seleccionaremos un elemento pivote y dividiremos la lista en dos partes, una con los elementos menores
-  a él y otra con los elementos mayores que él.
-  
-  Así, el pivote quedará en su posición ordenada. Si ésta es
-  la posición $k$, habremos acabado; en otro caso, sólo tendremos que buscar recursivamente sobre la 
-  sublista de elementos mayores, si el índice es menor que $k$; o sobre la sublista de elementos menores, si el
-  índice es mayor que $k$.
-  
-\begin{algorithm}[H]
+  \subsection{Algoritmo}
+    Nos basaremos en una idea similar a la usada para el algoritmo de ordenación \textit{Quicksort}.
+    Seleccionaremos un elemento pivote y dividiremos la lista en dos partes, una con los elementos menores
+    a él y otra con los elementos mayores que él.
+    
+    Así, el pivote quedará en su posición ordenada. Si ésta es
+    la posición $k$, habremos acabado; en otro caso, sólo tendremos que buscar recursivamente sobre la 
+    sublista de elementos mayores, si el índice es menor que $k$; o sobre la sublista de elementos menores, si el
+    índice es mayor que $k$.
+    
+    \begin{algorithm}[H]
 	\begin{algorithmic}[1]
-		\REQUIRE \ \\
-        	\texttt{v}, vector de números\\
-        	\texttt{k}, entero postivo\\\
-     	\STATE{\texttt{pivote$\leftarrow$ v[0]}}     	
-	\STATE{Definimos:\\
-	      \texttt{menores}=$\{x\in v : x<pivote\}$\\
-	      \texttt{iguales}=$\{x\in v : x=pivote\}$\\
-	      \texttt{mayores}=$\{x\in v : x>pivote\}$}
-	\\\
-    	\IF{\texttt{k<\#menores}}
-	  \RETURN {\texttt{k-ésimo(menores,k)}}
-	\ELSIF{\texttt{k<(\#menores+\#iguales)}}
-	  \RETURN {pivote}
-	\ELSE
-	  \RETURN {\texttt{k-ésimo(mayores,k-(\#menores+\#iguales))}}
-	\ENDIF
+		  \REQUIRE \ \\
+		  \texttt{v}, vector de números\\
+		  \texttt{k}, entero postivo\\\
+	  \STATE{\texttt{pivote$\leftarrow$ v[0]}}     	
+	  \STATE{Definimos:\\
+		\texttt{menores}=$\{x\in v : x<pivote\}$\\
+		\texttt{iguales}=$\{x\in v : x=pivote\}$\\
+		\texttt{mayores}=$\{x\in v : x>pivote\}$}
+	  \\\
+	  \IF{\texttt{k<\#menores}}
+	    \RETURN {\texttt{k-ésimo(menores,k)}}
+	  \ELSIF{\texttt{k<(\#menores+\#iguales)}}
+	    \RETURN {pivote}
+	  \ELSE
+	    \RETURN {\texttt{k-ésimo(mayores,k-(\#menores+\#iguales))}}
+	  \ENDIF
 	\end{algorithmic}
-    \caption{$k$-ésimo menor elemento de un vector. Primera versión.}
-    \label{kesimo}
-\end{algorithm}
+      \caption{$k$-ésimo menor elemento de un vector. Primera versión.}
+      \label{kesimo}
+    \end{algorithm}
+
+    Nótese como la elección del pivote en el algoritmo original es arbitraria. Esta elección condiciona la eficiencia de
+    todo el algoritmo. El pivote óptimo para el algoritmo sería la mediana de los elementos de la lista, pero su determinación
+    es costosa. En lugar de usar la mediana, buscamos un elemento que se aproxime lo suficiente a la mediana para asegurarnos
+    la mejora de eficiencia en el algoritmo.
+    
+    Se propone el siguiente algoritmo de obtención del pivote:
+    \begin{algorithm}[H]
+      \begin{algorithmic}
+	    \REQUIRE \ \\
+	    \texttt{v}, vector de números \\\
+	  
+	  \IF{\texttt{v.size >\ 5}}
+	    \STATE{\texttt{sublistas} $\leftarrow$ $[v[0..4],v[5..9],\dots,v[5\left\lceil\frac{n}{5}\right\rceil..n]]$} \\
+	    \STATE{\texttt{w} $\leftarrow$ \{ \texttt{pivote($s_i$)} $\ | \ $ $s_i$ $\in$ \texttt{sublistas} \} } \\
+	    \RETURN{\texttt{pivote(w)}}
+	  \ELSE
+	    \STATE{Ordenar \texttt{v}} \\
+	    \RETURN{\texttt{v[2]}} \\
+	  \ENDIF
+      \end{algorithmic}
+      \caption{Selección del pivote.}
+      \label{median-of-medians}
+    \end{algorithm}
 
 
 \section {Elemento mayoritario}
