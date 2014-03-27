@@ -187,7 +187,7 @@ de los bits de un número entero $x$
 \subsection{Análisis de eficiencia}
 El algoritmo convencional de multiplicación de dos enteros de $n$ cifras, tiene una eficiencia de $\mathcal{O}(n^2)$
 El algoritmo sigue la siguiente recurrencia:
-\begin{equation}
+\begin{equation}\label{rec}
  T(n)=\left\lbrace
 	    \begin{array}{lr}
             1 & n=1\\
@@ -200,7 +200,7 @@ donde $M\in\mathbb{R}$ es una constante, y el sumando $n$ del caso $n>1$ de la r
 de la longitud de los números en bits, las sumas y restas que se efectúan en el algoritmo, y las rotaciones.
 
 Para resolver la recurrencia, efectuamos el cambio de variable $n=2^k$:
-\begin{equation}
+\begin{equation}\label{prodcv}
  T(2^k)=3\cdot T(2^{k-1}) + M\cdot 2^k
 \end{equation}
 y resolvemos: 
@@ -208,8 +208,27 @@ y resolvemos:
 \begin{equation}
 x_k=3\cdot x_{k-1}+M\cdot 2^k
 \end{equation}
-Una solución particular de la recurrencia es:
-$$A\cdot 2^k - A \cdot 2^{k-1}$$
+Calculamos una solución particular de la recurrencia no homogénea:
+$$A\cdot 2^k - 3\cdot A \cdot 2^{k-1}=-A\cdot 2^{k-1}=M2^k \leftrightarrow A=-2M$$
+y por tanto: $x_k=-2M \cdot 2^k$ es solución particular\\
+Calculamos ahora la solución general a la recurrencia homogénea:
+$$ x_k-3\cdot x_{k-1}=0$$
+que tiene por polinomio característico a $x-3$. Por tanto, la solución general de la
+recurrencia homogénea es:
+$$ x_k= p\cdot 3^k\qquad p\in\mathbb{R}$$
+\\\
+Concluimos que la solución a la recurrencia \ref{prodcv} es: 
+\begin{equation}
+x_k = p \cdot 2^k + q \cdot 3^k \qquad p,q \in \mathbb{R}
+\end{equation}
+y deshaciendo el cambio en variable, llegamos a la solución de \ref{rec}:
+\begin{eqnarray*}
+T(n)=p \cdot 2^{log_2(n)} + q \cdot 3^{log_2(n)} = p \cdot 2^{log_2(n)} +\\
+q \cdot 3^{\frac{log_3(n)}{log_2(n)}}=p \cdot 2^{log_2(n)} + q \cdot n^{\frac{log3)}{log2}} \quad \in \mathcal{O}(n^{1.585})
+\end{eqnarray*}
+
+Por tanto el algoritmo de Karatsuba es mejor asintóticamente hablando que el convencional para efectuar
+el producto de dos números
 
 \section {$K$-ésimo menor elemento de un vector}
   \subsection{Algoritmo}
