@@ -160,29 +160,30 @@ Denotamos por \texttt{x $>>$ y} y \texttt{x $<<$ y} a las rotaciones a derecha e
 de los bits de un número entero $x$.
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
-		\REQUIRE \ \\
-        	\texttt{x,y, números enteros positivos}\\\
-        % (Comentario Mario)
-        % ¿Y sustituir esto por signo = sgn(xy), o algo parecido?
-	\IF{[x<0 \AND y<0] \OR [x>0 \AND y>0] }
-	  \STATE{\texttt{signo=}1}
-	\ELSE
-	  \STATE{\texttt{signo=}-1}
-	\ENDIF\\\
-	\STATE{\texttt{(x,y):=(|x|,|y|)}}
-        \STATE{\texttt{n}:= menor de las longitudes en bits de \texttt{x,y}}
-     	\\\
-     	\IF{\texttt{longitud} $<$ 2}
-     		\RETURN{$x\cdot y \cdot \texttt{signo}$}
-    	\ELSE
-	  \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}\\
+	  \REQUIRE \ \\
+	  \texttt{x,y, números enteros positivos}\\\
+        	
+	  % (Comentario Mario)
+	  % ¿Y sustituir esto por signo = sgn(xy), o algo parecido?
+	  \IF{[x<0 \AND y<0] \OR [x>0 \AND y>0]}
+	    \STATE{\texttt{signo=}1}
+	  \ELSE
+	    \STATE{\texttt{signo=}-1}
+	  \ENDIF\\\
+	  \STATE{\texttt{(x,y):=(|x|,|y|)}}
+	  \STATE{\texttt{n}:= menor de las longitudes en bits de \texttt{x,y}}
+	  \\\
+	  \IF{\texttt{longitud} $<$ 2}
+	    \RETURN{$x\cdot y \cdot \texttt{signo}$}
+	  \ELSE
+	    \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}\\
 		 \texttt{(b,d):= $\left\lfloor \frac{n}{2}\right\rfloor$} bits inferiores de \texttt{(x,y)}}
-	  \STATE{Calculamos \texttt{a$\cdot$c} y \texttt{b$\cdot$d} llamando recursivamente al algoritmo}
-	\ENDIF \\\
-    	\RETURN{\\\ $\bigg( ac << (\left\lceil n/2 \right\rceil \cdot 2) +
-    	\bigg[\texttt{Producto\_divide\_venceras}((a-b),(d-c)) +ac +bd\bigg]\cdot \left\lfloor n/2\right\rfloor + 
-    	bd \bigg) \cdot \texttt{signo}$
-    	}
+	    \STATE{Calculamos \texttt{a$\cdot$c} y \texttt{b$\cdot$d} llamando recursivamente al algoritmo}
+	  \ENDIF \\\
+	  \RETURN\\\ $\bigg( ac << (\left\lceil n/2 \right\rceil \cdot 2) +
+	    \bigg[\texttt{Producto\_divide\_venceras}((a-b),(d-c)) +ac +bd\bigg]\cdot \left\lfloor n/2\right\rfloor + 
+	    bd \bigg) \cdot \texttt{signo}$
+	  }
 	\end{algorithmic}
     \caption{Algoritmo de Karatsuba}
     \label{multiplicacion}
