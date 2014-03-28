@@ -143,7 +143,7 @@ Es claro que al tener que recorrer todas las componentes (es necesario leer las 
 del vector, para poder sumarlas), el mejor algoritmo que se puede ejecutar en un único core 
 será de complejidad $\mathcal{O}(n)$. En el caso de un único core, por tanto, no supone ninguna
 mejora el realizar el algoritmo Divide y Vencerás; más aún, este algoritmo será más lento que el
-iterativo, por la necesidad de crear marcos de pila nuevos para cada llamada a la función\\
+iterativo, por la necesidad de crear marcos de pila nuevos para cada llamada a la función.\\
 Para un procesador vectorial (SIMD), de nuevo encontramos que el algoritmo iterativo convencional
 (recorrer todo el vector e ir acumulando en una variable suma) sería más eficiente que el Divide y Vencerás.
 Únicamente encontraríamos mejora si el computador fuese de tipo MIMD, ya que en dicho caso podríamos crear
@@ -154,12 +154,16 @@ varias hebras y que cada una de ellas se ocupara de atender una llamada a la rec
 \subsection{Algoritmo}
 Llamamos longitud en bits de un número entero positivo $x=x_{n}x_{n-1}\ldots x_1)_b \quad \\ x_i \in \{0,1\}$
 a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
+% (Comentario Mario)
+% ¿Por qué usamos las rotaciones en lugar de desplazamientos?
 Denotamos por \texttt{x $>>$ y} y \texttt{x $<<$ y} a las rotaciones a derecha e izquierda $y$ posiciones
-de los bits de un número entero $x$
+de los bits de un número entero $x$.
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\REQUIRE \ \\
         	\texttt{x,y, números enteros positivos}\\\
+        % (Comentario Mario)
+        % ¿Y sustituir esto por signo = sgn(xy), o algo parecido?
 	\IF{[x<0 \AND y<0] \OR [x>0 \AND y>0] }
 	  \STATE{\texttt{signo=}1}
 	\ELSE
@@ -277,6 +281,9 @@ el producto de dos números
 	    \texttt{v}, vector de números \\\
 	  
 	  \IF{\texttt{v.size >\ 5}}
+	    % (Comentario Mario)
+	    % Yo sé que escribir 5\lfloor \frac{n}{5} \rfloor parece más confuso, pero no podemos ni debemos suponer que n es múltiplo de 5.
+	    % Escribir (n-4) no es correcto. De todas formas, habría que buscar una forma de escribirlo que fuera consistente.
 	    \STATE{\texttt{sublistas} $\leftarrow$ $[v[0..4],v[5..9],\dots,v[(n-4)..n]]$} \\
 	    \STATE{\texttt{w} $\leftarrow$ \{ \texttt{pivote($s_i$)} $\ | \ $ $s_i$ $\in$ \texttt{sublistas} \} } \\
 	    \RETURN{\texttt{pivote(w)}}
