@@ -144,6 +144,9 @@ del vector, para poder sumarlas), el mejor algoritmo que se puede ejecutar en un
 será de complejidad $\mathcal{O}(n)$. En el caso de un único core, por tanto, no supone ninguna
 mejora el realizar el algoritmo Divide y Vencerás; más aún, este algoritmo será más lento que el
 iterativo, por la necesidad de crear marcos de pila nuevos para cada llamada a la función.\\
+% (Comentario Mario)
+% La idea de aprovechar con un SIMD se aplica cuando el algoritmo queda escrito de abajo a arriba.
+% Pero se puede aprovechar un SIMD.
 Para un procesador vectorial (SIMD), de nuevo encontramos que el algoritmo iterativo convencional
 (recorrer todo el vector e ir acumulando en una variable suma) sería más eficiente que el Divide y Vencerás.
 Únicamente encontraríamos mejora si el computador fuese de tipo MIMD, ya que en dicho caso podríamos crear
@@ -183,7 +186,7 @@ de los bits de un número entero $x$.
 	  \RETURN\\\ $\bigg( ac << (\left\lceil n/2 \right\rceil \cdot 2) +
 	    \bigg[\texttt{Producto\_divide\_venceras}((a-b),(d-c)) +ac +bd\bigg]\cdot \left\lfloor n/2\right\rfloor + 
 	    bd \bigg) \cdot \texttt{signo}$
-	  }
+	  
 	\end{algorithmic}
     \caption{Algoritmo de Karatsuba}
     \label{multiplicacion}
