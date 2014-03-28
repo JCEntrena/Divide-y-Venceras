@@ -210,7 +210,7 @@ x_k=3\cdot x_{k-1}+M\cdot 2^k
 \end{equation}
 Calculamos una solución particular de la recurrencia no homogénea:
 $$A\cdot 2^k - 3\cdot A \cdot 2^{k-1}=-A\cdot 2^{k-1}=M2^k \leftrightarrow A=-2M$$
-y por tanto: $x_k=-2M \cdot 2^k$ es solución particular\\
+y por tanto: $x_k=-2M \cdot 2^k$ es solución particular.\\
 Calculamos ahora la solución general a la recurrencia homogénea:
 $$ x_k-3\cdot x_{k-1}=0$$
 que tiene por polinomio característico a $x-3$. Por tanto, la solución general de la
@@ -223,8 +223,8 @@ x_k = p \cdot 2^k + q \cdot 3^k \qquad p,q \in \mathbb{R}
 \end{equation}
 y deshaciendo el cambio en variable, llegamos a la solución de \ref{rec}:
 \begin{eqnarray*}
-T(n)=p \cdot 2^{log_2(n)} + q \cdot 3^{log_2(n)} = p \cdot 2^{log_2(n)} +\\
-q \cdot 3^{\frac{log_3(n)}{log_2(n)}}=p \cdot 2^{log_2(n)} + q \cdot n^{\frac{log3)}{log2}} \quad \in \mathcal{O}(n^{1.585})
+T(n)=p \cdot 2^{log_2(n)} + q \cdot 3^{log_2(n)} = p \cdot 2^{\frac{log(n)}{log(2)}} +\\
+q \cdot 3^{\frac{log(n)}{log(2)}}=p \cdot n + q \cdot n^{\frac{log(3)}{log(2)}} \quad \in \mathcal{O}(n^{1.585})
 \end{eqnarray*}
 
 Por tanto el algoritmo de Karatsuba es mejor asintóticamente hablando que el convencional para efectuar
@@ -326,6 +326,7 @@ el producto de dos números
     
 
 \section {Elemento mayoritario}
+\subsection{Algoritmo}
 Se denomina \textit{elemento mayoritario} de una lista a aquel que aparece más de $n/2$ veces, donde $n$ es el tamaño de la lista.
 El problema reside en eliminar la necesidad de contar todas las ocurrencias de cada uno de los elementos, de forma que podamos conocer el mayoritario más eficientemente.
 Para ello, utilizaremos la siguiente estrategia:
@@ -356,7 +357,7 @@ Efectivamente, esta estrategia nos asegura que, de existir un elemento mayoritar
 	     		\ENDIF
      		\ENDFOR
     	\ENDIF \\\
-    	\RETURN{elemento mayoritario de \texttt{repet} (llamada recursiva)}
+    	\RETURN{mayoritario(\texttt{repet})}
 	\end{algorithmic}
     \caption{Búsqueda del elemento mayoritario}
     \label{mayoritario}
