@@ -388,7 +388,22 @@ Una vez encontrado el candidato a elemento mayoritario mediante el algoritmo, es
 
 \subsection{Análisis de eficiencia}
 El algoritmo produce una única llamada recursiva con un argumento de tamaño como mucho $\frac{n}{2}$, siendo $n$ el tamaño actual. Por tanto tenemos la recurrencia
-$$ T(n) = T\left(\frac{n}{2}\right) + n $$
+\begin{equation}
+\label{eqmay}
+T(n)=\left\lbrace
+	    \begin{array}{lr}
+            1 & n\le 2\\
+            T\left(\frac{n}{2}\right) + n & n>2\\
+            \end{array}
+	    \right.
+\end{equation} 
+Cambiamos de variable, $m = log_2(n);\ n = 2^m$, y resolvemos la ecuación homogénea asociada:
+$$ x_m-x_{m-1}=0 \Rightarrow x_n = 1^n\ c_1 $$
+Y hallamos una solución particular para la ecuación en recurrencia no homogénea. Por ejemplo, la sucesión $\{0, 2, 6, 14, 30\dots\}=\{2^{n+1}-2\}_{n\ge 0}$ cumple la ecuación. La solución general es por tanto
+$$ x_m = 1^n\ c_1 + 2^{n+1}-2\ \forall m\ge 0$$
+Al deshacer el cambio de variable tenemos:
+$$ T(n) = c_1 + 2n-2\ \in \mathcal{O}(n)$$
+El algoritmo de búsqueda del elemento mayoritario es lineal.
 
 \section {Tornillos y tuercas}
     Tenemos dos listas cuyos elementos están emparejados con uno y sólo uno de los elementos de la otra lista.
