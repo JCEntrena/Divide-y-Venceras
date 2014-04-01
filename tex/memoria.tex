@@ -279,6 +279,7 @@ el producto de dos números
     
     Se propone como algoritmo de obtención del pivote dividir la lista en sublistas de $5$ elementos, de las que se obtendrá
     la mediana usando cualquier algoritmo de ordenación. Sobre las medianas obtenidas, se aplica recursivamente el algoritmo.
+    Se obtiene así una pseudomediana suficientemente cercana a la verdadera mediana de la lista.
     \begin{algorithm}[H]
       \begin{algorithmic}
 	    \REQUIRE \ \\
@@ -336,6 +337,29 @@ el producto de dos números
       Sin embargo, el caso peor con elección arbitraria es $\mathcal{O}(n^2)$. Trivialmente, escogiendo a cada paso el mínimo de los elementos restantes como pivote
       mientras que buscamos el elemento máximo de la lista, nos lleva a aplicar la partición $n$ veces, cada una de ellas con coste $\mathcal{O}(n)$.
     
+    \subsubsection{Elección de la pseudomediana}
+      El elegir la mediana siguiendo el algoritmo propuesto anteriormente permite escoger un pivote que sea lo suficientemente cercano a la verdadera mediana.
+      Acotmos el número de elementos menores que la pseudomediana. Sabemos que una mediana así elegida nos permite afirmar que, de los elementos de las sublistas
+      con medianas menores al pivote, hasta $\frac{5}{2} \lceil \frac{n}{5} \rceil$ pueden ser menores. De los elementos de las sublistas con medianas mayores,
+      sólo 2 de ellos podrían ser menores, dando en total $ \lceil \frac{n}{5} \rceil$ elementos menores. Añadimos además los dos elementos de la sublista menores a la pseudomediana.
+      
+      Tenemos entonces que el número de elementos menores queda acotado por:
+      \begin{equation}
+       \frac{5}{2} \left\lceil \frac{n}{5} \right\rceil + \left\lceil \frac{n}{5} \right\rceil + 2 \leq \frac{7n}{10} + \mathcal{O}(1) 
+      \end{equation}
+      Lo que asegura que la pseudomediana está entre aproximadamente el percentil $70$ de la lista.
+      
+      El algoritmo satisface entonces la siguiente ecuación en recurrencia, donde los sumandos se corresponden con la aplicación
+      recursiva del algoritmo, la aplicación sobre la lista que queda tras la pseudomediana y el proceso de pivotar:
+      \begin{equation}
+       T(n) \leq T\left(\left\lceil \frac{n}{5} \right\rceil \right) + T\left(\frac{7n}{10} + \mathcal{O}(1) \right) + \mathcal{O}(n)
+      \end{equation}
+      Lo que nos lleva, por inducción suponiendo $T(n) = cn$, a que el algoritmo es lineal. 
+      
+      
+      
+      
+      
 
 \section {Elemento mayoritario}
 \subsection{Algoritmo}
