@@ -344,12 +344,14 @@ El problema reside en eliminar la necesidad de contar todas las ocurrencias de c
 Para ello, utilizaremos la siguiente estrategia:
 
 \begin{itemize}
-\item Tomamos parejas de elementos consecutivos en la lista.
+\item Tomamos $\left\lfloor\frac{n}{2}\right\rfloor$ parejas de elementos consecutivos en la lista.
 \item Para cada pareja, comprobaremos cuáles tienen sus dos elementos iguales.
 \item Creamos una nueva lista con los elementos correspondientes a cada pareja de valores repetidos.
 \end{itemize}
 
-Efectivamente, esta estrategia nos asegura que, de existir un elemento mayoritario en la lista original, entonces será el elemento mayoritario de la nueva lista. Veamos por tanto el algoritmo seguido para la resolución del problema:
+Efectivamente, se justifica mediante el principio del palomar que habrá al menos una pareja que contenga al elemento mayoritario repetido (excepto en el caso de tamaño impar y elemento mayoritario en la última posición, donde podría no haber parejas de elementos repetidos), y podemos ver que cada pareja de elementos repetidos distintos del mayoritario provocará la existencia de una pareja con el mayoritario.
+
+Una vez encontrado el candidato a elemento mayoritario mediante el algoritmo, es necesario comprobar si realmente lo es, ya que la condición que tenemos es necesaria pero no suficiente. Además, si el tamaño del vector es impar, la estrategia no considerará el último elemento (ya que no entra en ninguna pareja), luego habrá que comprobarlo después. Estas operaciones se realizan trivialmente en $\mathcal{O}(n)$.
 
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
@@ -363,36 +365,30 @@ Efectivamente, esta estrategia nos asegura que, de existir un elemento mayoritar
      		\ENDIF \\\
      		
      		\STATE{Crear un nuevo vector \texttt{repet}}
-     		\FORALL{\texttt{e} \textbf{en} \texttt{elem}}
-	     		\IF{\texttt{e} es el último \OR \texttt{e} == siguiente de \texttt{e}}
-		     		\STATE{Añadir \texttt{e} a \texttt{repet}}
+     		\FORALL{\texttt{(p, q)} pareja consecutiva \textbf{en} \texttt{elem}}
+	     		\IF{\texttt{p} == \texttt{q}}
+		     		\STATE{Añadir \texttt{p} a \texttt{repet}}
 	     		\ENDIF
      		\ENDFOR
     	\ENDIF \\\
-    	\RETURN{mayoritario(\texttt{repet})}
+    	\STATE{\texttt{may} $\gets$ \texttt{mayoritario(repet)}}
+    	\IF{(ocurrencias de \texttt{may}) >\ \#\texttt{elem}/2}
+     		\RETURN{\texttt{may}}
+     	\ELSE
+     		\IF{(ocurrencias de \texttt{elem[\#elem - 1]}) >\ \#\texttt{elem}/2}
+     			\RETURN{\texttt{elem[\#elem - 1]}}
+     		\ELSE
+     			\RETURN{\texttt{NULO}}
+     		\ENDIF
+    	\ENDIF
 	\end{algorithmic}
     \caption{Búsqueda del elemento mayoritario}
     \label{mayoritario}
 \end{algorithm}
-\begin{algorithm}[H]
-	\begin{algorithmic}[1]
-		\REQUIRE \ \\
-        	\texttt{elem}, vector de elementos\\
-        	\texttt{may}, candidato a mayoritario\\\
-    	\IF{ocurrencias de \texttt{may} en \texttt{elem} >\ \#\texttt{elem}/2}
-     		\RETURN{\texttt{may}}
-     	\ELSE
-     		\RETURN{\texttt{NULO}}
-    	\ENDIF \\
-	\end{algorithmic}
-    \caption{Comprobación del elemento mayoritario}
-    \label{checkmay}
-\end{algorithm}
-
-Una vez encontrado el candidato a elemento mayoritario mediante el algoritmo \ref{mayoritario}, es necesario comprobar si realmente lo es (algoritmo \ref{checkmay}), ya que la condición que tenemos es necesaria pero no suficiente. Esta operación se realiza trivialmente en $\mathcal{O}(n)$.
 
 \subsection{Análisis de eficiencia}
-
+El algoritmo produce una única llamada recursiva con un argumento de tamaño como mucho $\frac{n}{2}$, siendo $n$ el tamaño actual. Por tanto tenemos la recurrencia
+$$ T(n) = T\left(\frac{n}{2}\right) + n $$
 
 \section {Tornillos y tuercas}
     Tenemos dos listas cuyos elementos están emparejados con uno y sólo uno de los elementos de la otra lista.
