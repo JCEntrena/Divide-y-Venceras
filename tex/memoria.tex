@@ -420,7 +420,7 @@ T(n)=\left\lbrace
 Cambiamos de variable, $m = log_2(n);\ n = 2^m$, y resolvemos la ecuación homogénea asociada:
 $$ x_m-x_{m-1}=0 \Rightarrow x_n = 1^n\ c_1 $$
 Y hallamos una solución particular para la ecuación en recurrencia no homogénea. Por ejemplo, la sucesión $\{0, 2, 6, 14, 30\dots\}=\{2^{n+1}-2\}_{n\ge 0}$ cumple la ecuación. La solución general es por tanto
-$$ x_m = 1^n\ c_1 + 2^{n+1}-2\ \forall m\ge 0$$
+$$ x_m = 1^m\ c_1 + 2^{m+1}-2\ \forall m\ge 0$$
 Al deshacer el cambio de variable tenemos:
 $$ T(n) = c_1 + 2n-2\ \in \mathcal{O}(n)$$
 El algoritmo de búsqueda del elemento mayoritario es lineal.
@@ -464,38 +464,110 @@ El algoritmo de búsqueda del elemento mayoritario es lineal.
 \end{algorithm}
 
 \section {Compraventa de acciones}
+\subsection{Algoritmo}
 	% (Comentario Mario)
 	% ¿Necesitamos suponerlos double? De hecho, con que sean datos donde haya definida relación de orden...
-	Tenemos un array con valores numéricos (que suponemos double) y queremos calcular la mayor diferencia entre dos elementos a y b, 
-	esto es, maximizar b-a, con la condición de que la posición de b sea mayor que la de a. 
+	Dado un array con valores numéricos, queremos calcular la mayor diferencia entre dos elementos a y b, con la condición de que la posición de b sea mayor que la de a, simulando de esta forma una operación de compraventa de acciones en la que queremos obtener la mayor ganancia, con la natural restricción de que hemos de comprar las acciones antes de venderlas. 
 	
-	Para ello vamos a utilizar un algoritmo recursivo. La idea de este algoritmo es la siguiente: Calculamos el mínimo y el máximo del 
-	vector. Si el mínimo está antes que el máximo, hemos terminado, solo queda devolver sus posiciones. Si no es así, el vector queda 
-	dividido en tres partes: Inicio-Máximo, Máximo+1-Minimo-1, y Mínimo-Final. En los trozos de los extremos podemos calcular la ganancia 
-	directamente (calculando un mínimo en la primera y un máximo en la última), y para el trozo restante llamamos a la función de forma 
-	recursiva. Después hay que comprobar cuál es el óptimo y quedarnos con su solución. 
+	Vamos a utilizar un algoritmo recursivo, utilizando la técnica divide y vencerás. 
+	La idea es la siguiente: 
 	
-	%(Comentario de JC)
-	% He decidido comprobar que el vector no esté ordenado de mayor a menor desde el principio, ya que facilita mucho las cosas. De todas formas no sé si este algoritmo es óptimo, así que echadle un vistazo. 
+	Como caso base, si el array tiene longitud 1, devolvemos la posición del elemento. 
 	
+	Si el array tiene más de un elemento, lo dividimos en dos mitades. Se nos presentan tres disyuntivas: 
+	\begin{itemize}
+		\item Los valores mínimo y máximo están en la primera mitad.
+		\item Los valores mínimo y máximo están en la segunda mitad. 
+		\item El valor mínimo está en la primera mitad, y el máximo en la segunda. 
+	\end{itemize}
+	
+	Para resolver esto, llamamos recursivamente a la función sobre ambas mitades, y calculamos el mínimo en la primera mitad, y el máximo en la segunda. Comparamos entre los tres resultados para quedarnos con la mayor ganancia y devolvemos las posiciones correspondientes. 
+	
+	\begin{algorithm}[H]
+		\begin{algorithmic}[1]
+			\REQUIRE \ \\
+	        	\texttt{Array}\\\
+	     	\IF{\texttt{Array.size == 1}}
+	     		\RETURN {Posición del elemento como momento de compra y venta}
+	     	\ELSE
+				\STATE{Dividimos el array en dos}
+	     		\STATE{Definimos: \\
+	     			\texttt{L}=\texttt{Mitad izquierda del array}\\
+	     			\texttt{R}=\texttt{Mitad derecha del array}\\}
+	     		\STATE{Llamamos recursivamente a la función sobre L y R}
+	     		\STATE{Calculamos: \\ 
+	     			\texttt{Min}=\texttt{Mínimo de L}\\
+	     			\texttt{Max}=\texttt{Máximo de R}\\}
+	     		\STATE{Hallamos la mayor de las tres ganancias y ajustamos los momentos de compra y venta}
+	     		\RETURN{Momentos de compra y venta}
+	    	\ENDIF
+		\end{algorithmic}
+		\caption{Compraventa de Acciones}
+		\label{algoritmo}
+	\end{algorithm}
 
-\begin{algorithm}[H]
-	\begin{algorithmic}[1]
-		\REQUIRE \ \\
-        	\texttt{Array}\\\
-     	\IF{Ordenado}
-     		\RETURN {\texttt{Punteros a NULL}}
-     	\ELSE
-     		\STATE{Calculamos el mínimo y el máximo}
-     		\IF{Pos[mínimo] < Pos[máximo]}
-     			\RETURN{Posiciones}
-     		\ENDIF \\\
-     		\ELSE
-     			\STATE{Hacemos la división en trozos. Llamamos a la función de forma recursiva y nos quedamos con la mejor solución}
-    	\ENDIF \\\
-	\end{algorithmic}
-    \caption{Compraventa de Acciones}
-    \label{algoritmo}
-\end{algorithm}
+\subsection{Análisis de eficiencia}
+Nuestro algoritmo tiene dos llamadas recursivas con un argumento de tamaño $\frac{n}{2}$, siendo $n$ el tamaño actual. Además, en cada llamada recursiva hemos de calcular un máximo y un mínimo, operaciones que consumen un tiempo lineal. Nuestro caso base es de tiempo constante, lo que nos da la recurrencia: 
+\begin{equation}
+T(n)=\left\lbrace
+	    \begin{array}{lr}
+            1 & n=1\\
+            2T\left(\frac{n}{2}\right) + n & n>1\\
+            \end{array}
+	    \right.
+\end{equation}
 
+Si cambiamos de variable, $m = log_2(n);\ n = 2^m$, y resolvemos la ecuación homogénea asociada:
+$$ x_m-2x_{m-1}=0 \Rightarrow x_n = 2^n\ c_1 $$
+Hallamos una solución particular para la ecuación en recurrencia no homogénea, como la sucesión $\{0, 2, 8, 24, 64\dots\}=\{n2^{n}\}_{n\ge 0}$ que verifica la ecuación en recurrencias. La solución general es por tanto:
+$$ x_m = 2^m\ c_1 + m2^{m}\ \forall m\ge 0$$
+Al deshacer el cambio de variable tenemos:
+$$ T(n) = nc_1 + nlog(n)\ \in \mathcal{O}(nlog(n))$$
+Podemos apuntar que, como esta recurrencia es la misma que la obtenida en el algoritmo de ordenación Mergesort, podríamos decir de antemano que la eficiencia de este algoritmo es $\mathcal{O}(n log(n))$.
+
+\subsection{Algoritmo mejorado}
+
+	El algoritmo anterior mejora a un algoritmo directo, que tendría una eficiencia cuadrática. Sin embargo, se puede ver que el cálculo del mínimo y el máximo de las dos partes del array en cada iteración nos impide obtener un algoritmo aun más eficiente, lo que nos lleva a preguntarnos si existe alguna forma de evitar esto. La respuesta es afirmativa; podemos aprovechar la técnica divide y vencerás para calcular también el máximo y el mínimo de un array. De esta forma: 
+	
+	\begin{itemize}
+		\item Si el array tiene un elemento, éste es el máximo y el mínimo.
+		\item El mínimo de un array con más de un elemento es el mínimo de los respectivos mínimos de las dos mitades. 
+	\end{itemize}
+	
+	Esto nos lleva a intentar aprovechar las llamadas recursivas que ya realizamos para calcular el mínimo y máximo de cada parte; en lugar de ser un procedimiento lineal, ahora será constante, pues simplemente calculamos el mínimo o máximo de dos números. 
+	
+	Nuestro algoritmo sería ahora de la siguiente forma: 
+	
+	\begin{algorithm}[H]
+		\begin{algorithmic}[1]
+			\REQUIRE \ \\
+				\texttt{Array}\\\
+			\IF{\texttt{Array.size == 1}}
+				\RETURN {Posición del elemento como momento de compra y venta. Minimo = elemento. Máximo = elemento.}
+			\ELSE
+				\STATE{Dividimos el array en dos}
+				\STATE{Definimos: \\
+					\texttt{L}=\texttt{Mitad izquierda del array}\\
+					\texttt{R}=\texttt{Mitad derecha del array}\\}
+				\STATE{Llamamos recursivamente a la función sobre L y R. De esta forma también obtenemos el mínimo de L y el máximo de R}
+				\STATE{Hallamos la mayor de las tres ganancias y ajustamos los momentos de compra y venta}
+				\RETURN{Momentos de compra y venta}
+			\ENDIF
+			\end{algorithmic}
+		\caption{Compraventa de acciones mejorado}
+		\label{algoritmo mejorado}
+	\end{algorithm}
+	
+\subsection{Análisis de eficiencia}
+El nuevo algoritmo sigue teniendo dos llamadas recursivas con un argumento de tamaño $\frac{n}{2}$, siendo $n$ el tamaño actual. Sin embargo, el nuevo calculo del mínimo y del máximo se hace entre dos números, lo que lo hace de tiempo constante. Nuestro caso base sigue siendo de tiempo constante, lo que nos da la nueva ecuación en recurrencias: 
+\begin{equation}
+T(n)=\left\lbrace
+	    \begin{array}{lr}
+            1 & n\le 1\\
+            2T\left(\frac{n}{2}\right) + 1 & n>2\\
+            \end{array}
+	    \right.
+\end{equation}
+Cambiamos de variable, $m = log_2(n);\ n = 2^m$ y resolvemos la ecuación, lo que nos da una eficiencia $\mathcal{O}(n)$
+	
 \end{document}
