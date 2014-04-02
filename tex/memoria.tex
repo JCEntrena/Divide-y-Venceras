@@ -418,8 +418,8 @@ T(n)=\left\lbrace
 	    \right.
 \end{equation} 
 Cambiamos de variable, $m = log_2(n);\ n = 2^m$, y resolvemos la ecuación homogénea asociada:
-$$ x_m-x_{m-1}=0 \Rightarrow x_n = 1^n\ c_1 $$
-Y hallamos una solución particular para la ecuación en recurrencia no homogénea. Por ejemplo, la sucesión $\{0, 2, 6, 14, 30\dots\}=\{2^{n+1}-2\}_{n\ge 0}$ cumple la ecuación. La solución general es por tanto
+$$ x_m-x_{m-1}=0 \Rightarrow x_m = 1^m\ c_1 $$
+Y hallamos una solución particular para la ecuación en recurrencia no homogénea. Por ejemplo, la sucesión $\{0, 2, 6, 14, 30\dots\}=\{2^{m+1}-2\}_{m\ge 0}$ cumple la ecuación. La solución general es por tanto
 $$ x_m = 1^m\ c_1 + 2^{m+1}-2\ \forall m\ge 0$$
 Al deshacer el cambio de variable tenemos:
 $$ T(n) = c_1 + 2n-2\ \in \mathcal{O}(n)$$
@@ -467,21 +467,23 @@ El algoritmo de búsqueda del elemento mayoritario es lineal.
 \subsection{Algoritmo}
 	% (Comentario Mario)
 	% ¿Necesitamos suponerlos double? De hecho, con que sean datos donde haya definida relación de orden...
-	Dado un array con valores numéricos, queremos calcular la mayor diferencia entre dos elementos a y b, con la condición de que la posición de b sea mayor que la de a, simulando de esta forma una operación de compraventa de acciones en la que queremos obtener la mayor ganancia, con la natural restricción de que hemos de comprar las acciones antes de venderlas. 
+	Dado un array con valores numéricos, queremos calcular las posiciones a y b que nos den la mayor diferencia $array[b]-array[a]$, con la condición de que la posición b esté más a la derecha que a.
+	Simularemos de esta forma una operación de compraventa de acciones en la que queremos obtener la mayor ganancia, donde el array representa el precio de las acciones a lo largo de un periodo de tiempo, y tenemos la natural restricción de que hemos de comprar las acciones antes de venderlas. 
 	
-	Vamos a utilizar un algoritmo recursivo, utilizando la técnica divide y vencerás. 
+	Vamos a emplear un algoritmo recursivo, utilizando la técnica divide y vencerás. 
 	La idea es la siguiente: 
 	
 	Como caso base, si el array tiene longitud 1, devolvemos la posición del elemento. 
 	
 	Si el array tiene más de un elemento, lo dividimos en dos mitades. Se nos presentan tres disyuntivas: 
 	\begin{itemize}
-		\item Los valores mínimo y máximo están en la primera mitad.
-		\item Los valores mínimo y máximo están en la segunda mitad. 
-		\item El valor mínimo está en la primera mitad, y el máximo en la segunda. 
+		\item Los valores minimal\footnote[1]{Llamamos minimal al valor al que compramos las acciones. No debe confundirse con el mínimo del array. De igual forma, llamamos maximal al valor al que vendemos las acciones, que no debe confundirse con el máximo.}
+			 y maximal están en la primera mitad.
+		\item Los valores minimal y maximal están en la segunda mitad. 
+		\item El valor minimal está en la primera mitad, y el maximal en la segunda. 
 	\end{itemize}
 	
-	Para resolver esto, llamamos recursivamente a la función sobre ambas mitades, y calculamos el mínimo en la primera mitad, y el máximo en la segunda. Comparamos entre los tres resultados para quedarnos con la mayor ganancia y devolvemos las posiciones correspondientes. 
+	Para resolver esto, llamaremos recursivamente a la función sobre ambas mitades, y calcularemos el mínimo en la primera mitad, y el máximo en la segunda. Compararemos entre los tres resultados para quedarnos con la mayor ganancia y finalmente devolver las posiciones correspondientes. 
 	
 	\begin{algorithm}[H]
 		\begin{algorithmic}[1]
@@ -518,8 +520,8 @@ T(n)=\left\lbrace
 \end{equation}
 
 Si cambiamos de variable, $m = log_2(n);\ n = 2^m$, y resolvemos la ecuación homogénea asociada:
-$$ x_m-2x_{m-1}=0 \Rightarrow x_n = 2^n\ c_1 $$
-Hallamos una solución particular para la ecuación en recurrencia no homogénea, como la sucesión $\{0, 2, 8, 24, 64\dots\}=\{n2^{n}\}_{n\ge 0}$ que verifica la ecuación en recurrencias. La solución general es por tanto:
+$$ x_m-2x_{m-1}=0 \Rightarrow x_m = 2^m\ c_1 $$
+Hallamos una solución particular para la ecuación en recurrencia no homogénea, como la sucesión $\{0, 2, 8, 24, 64\dots\}=\{m2^{m}\}_{m\ge 0}$ que verifica la ecuación en recurrencias. La solución general es por tanto:
 $$ x_m = 2^m\ c_1 + m2^{m}\ \forall m\ge 0$$
 Al deshacer el cambio de variable tenemos:
 $$ T(n) = nc_1 + nlog(n)\ \in \mathcal{O}(nlog(n))$$
@@ -527,14 +529,14 @@ Podemos apuntar que, como esta recurrencia es la misma que la obtenida en el alg
 
 \subsection{Algoritmo mejorado}
 
-	El algoritmo anterior mejora a un algoritmo directo, que tendría una eficiencia cuadrática. Sin embargo, se puede ver que el cálculo del mínimo y el máximo de las dos partes del array en cada iteración nos impide obtener un algoritmo aun más eficiente, lo que nos lleva a preguntarnos si existe alguna forma de evitar esto. La respuesta es afirmativa; podemos aprovechar la técnica divide y vencerás para calcular también el máximo y el mínimo de un array. De esta forma: 
+	El algoritmo anterior mejora a un algoritmo directo, que tendría una eficiencia cuadrática. Sin embargo, se puede ver que el cálculo del mínimo y el máximo de las dos partes del array en cada iteración nos impide obtener un algoritmo aun más eficiente, lo que nos lleva a preguntarnos si existe alguna forma de evitar esto. La respuesta es afirmativa; podemos aprovechar la técnica divide y vencerás para calcular también el máximo y el mínimo de un array, aprovechando las llamadas recursivas que hacemos. De esta forma: 
 	
 	\begin{itemize}
 		\item Si el array tiene un elemento, éste es el máximo y el mínimo.
-		\item El mínimo de un array con más de un elemento es el mínimo de los respectivos mínimos de las dos mitades. 
+		\item El mínimo de un array con más de un elemento es el mínimo de los respectivos mínimos de las dos mitades (Análogo para el máximo).
 	\end{itemize}
 	
-	Esto nos lleva a intentar aprovechar las llamadas recursivas que ya realizamos para calcular el mínimo y máximo de cada parte; en lugar de ser un procedimiento lineal, ahora será constante, pues simplemente calculamos el mínimo o máximo de dos números. 
+	Ahora, el proceso de calcular el máximo y el mínimo será constante en lugar de lineal, pues simplemente calculamos el mínimo o máximo de dos números obtenidos anteriormente gracias a la recursividad. 
 	
 	Nuestro algoritmo sería ahora de la siguiente forma: 
 	
@@ -551,7 +553,8 @@ Podemos apuntar que, como esta recurrencia es la misma que la obtenida en el alg
 					\texttt{R}=\texttt{Mitad derecha del array}\\}
 				\STATE{Llamamos recursivamente a la función sobre L y R. De esta forma también obtenemos el mínimo de L y el máximo de R}
 				\STATE{Hallamos la mayor de las tres ganancias y ajustamos los momentos de compra y venta}
-				\RETURN{Momentos de compra y venta}
+				\STATE{Recalculamos el mínimo y el máximo del array}
+				\RETURN{Momentos de compra y venta. Mínimo y máximo.}
 			\ENDIF
 			\end{algorithmic}
 		\caption{Compraventa de acciones mejorado}
@@ -563,11 +566,16 @@ El nuevo algoritmo sigue teniendo dos llamadas recursivas con un argumento de ta
 \begin{equation}
 T(n)=\left\lbrace
 	    \begin{array}{lr}
-            1 & n\le 1\\
-            2T\left(\frac{n}{2}\right) + 1 & n>2\\
+            1 & n = 1\\
+            2T\left(\frac{n}{2}\right) + 1 & n>1\\
             \end{array}
 	    \right.
 \end{equation}
-Cambiamos de variable, $m = log_2(n);\ n = 2^m$ y resolvemos la ecuación, lo que nos da una eficiencia $\mathcal{O}(n)$
+Cambiamos de variable, $m = log_2(n);\ n = 2^m$ y resolvemos la ecuación homogénea asociada: 
+$$ x_m-2x_{m-1}=0 \Rightarrow x_m = 2^m\ c_1 $$
+Hallamos una solución particular para la ecuación en recurrencia no homogénea, como la sucesión $\{0, 1, 3, 7, 15\dots\}=\{2^{m}-1\}_{m\ge 0}$ que verifica la ecuación en recurrencias. La solución general es por tanto:
+$$ x_m = 2^m\ c_1 + 2^{m}-1\ \forall m\ge 0$$
+Al deshacer el cambio de variable tenemos:
+$$ T(n) = nc_1 + n-1 = n(c_1 + 1)-1\ \in \mathcal{O}(n)$$
 	
 \end{document}
