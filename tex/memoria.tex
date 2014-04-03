@@ -523,11 +523,12 @@ A continuación mostramos una implementación en el lenguaje Ruby:
       
       Por otra parte, el mejor caso consigue dividir la lista por la mitad. En este caso, nos resuelve el problema con eficiencia $\mathcal{O}(nlog(n))$:
       
-      % No estoy seguro de si ponerlo como "equation"
-	  %\begin{equation}
-	  	$T(n) = 2n + T(\left\lceil \frac{n-1}{2} \right\rceil) + T(\left\lfloor \frac{n-1}{2}\right\rfloor) \approx 2n + 2T(\frac{n}{2}) \approx 2n + 2n + 4T(\frac{n}{4}) = \\ = 4n + 4T(\frac{n}{4})\approx 4n + 2n + 8T(\frac{n}{8}) = 6n + 8T(\frac{n}{8}) \approx \dots \approx 2nlog_2(n) + n T(0) = 2nlog_2(n) + n$
-	  %\end{equation}
-      
+	  \begin{eqnarray*}
+	  \lefteqn{T(n) = 2n + T\bigg(\left\lceil \frac{n-1}{2} \right\rceil\bigg) + T\bigg(\left\lfloor \frac{n-1}{2}\right\rfloor\bigg) \approx 2n + 2T\bigg(\frac{n}{2}\bigg) \approx} \\
+	  && \approx 2n + 2n + 4T\bigg(\frac{n}{4}\bigg) = 4n + 4T\bigg(\frac{n}{4}\bigg)\approx 4n + 2n + 8T\bigg(\frac{n}{8}\bigg) = \\ 
+	  && = 6n + 8T\bigg(\frac{n}{8}\bigg) \approx \dots \approx 2nlog_2(n) + n T(0) = 2nlog_2(n) + n
+	  \end{eqnarray*}
+	  
       El caso medio del algoritmo es $\mathcal{O}(nlog(n)) $. Puede comprobarse siguiendo un razonamiento similar al aplicado para calcular el caso medio en \textit{Quicksort}, podemos analizar su eficiencia.
     
       El algoritmo realiza dos particiones, una alrededor del pivote y otra alrededor de su pareja, ambas en tiempo $\mathcal{O}(n)$. Ahora, aplicamos el algoritmo
@@ -537,7 +538,7 @@ A continuación mostramos una implementación en el lenguaje Ruby:
 		T(n) = 2n + \frac{1}{n}\sum_{i=0}^{n-1}\left(T(i) + T(n-1-i) \right)
       \end{equation}
       
-      Al evaluarlo en n-1, queda:
+      Al evaluarlo en $n-1$, queda:
       \begin{equation}
       	T(n-1) = 2(n-1) + \frac{1}{n-1}\sum_{i=0}^{n-2}\left(T(i) + T((n-2-i) \right)
       \end{equation}
