@@ -18,7 +18,7 @@ hstex: $(patsubst $(SRC)/%.hs, $(TEX)/%.tex, $(wildcard $(SRC)/*.hs))
 $(BIN)/%: $(SRC)/%.cpp
 	g++ $< -o $@ $(FLAGS)
 
-$(TEX)/%.tex: $(SRC)/%.rb $(SRC)/%.hs
+$(TEX)/%.tex: $(SRC)/%.rb
 	source-highlight -f latexcolor -i $< -o $@
 
 # Limpieza de los ejecutables
