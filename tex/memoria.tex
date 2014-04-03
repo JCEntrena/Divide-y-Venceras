@@ -427,15 +427,14 @@ condición que tenemos es necesaria pero no suficiente. Además, si el tamaño d
     	 		\RETURN{\texttt{elem[0]}} 
      		\ELSE
      			\RETURN{\texttt{NULO}}
-     		\ENDIF \\\
-     		
-     		\STATE{Crear un nuevo vector \texttt{repet}}
-     		\FORALL{\texttt{(p, q)} pareja consecutiva \textbf{en} \texttt{elem}}
-	     		\IF{\texttt{p} == \texttt{q}}
-		     		\STATE{Añadir \texttt{p} a \texttt{repet}}
-	     		\ENDIF
-     		\ENDFOR
-    	\ENDIF \\\
+     		\ENDIF 
+     	\ENDIF\\\
+     	\STATE{Crear un nuevo vector \texttt{repet}}
+     	\FORALL{\texttt{(p, q)} pareja consecutiva \textbf{en} \texttt{elem}}
+	    	\IF{\texttt{p} == \texttt{q}}
+		 		\STATE{Añadir \texttt{p} a \texttt{repet}}
+	     	\ENDIF
+     	\ENDFOR \\\
     	\STATE{\texttt{may} $\gets$ \texttt{mayoritario(repet)}}
     	\IF{(ocurrencias de \texttt{may}) >\ \#\texttt{elem}/2}
      		\RETURN{\texttt{may}}
