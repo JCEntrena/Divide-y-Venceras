@@ -563,22 +563,29 @@ A continuación mostramos una implementación en el lenguaje Ruby:
 	    nT(n) - (n-1)T(n-1) = 4n-2 + 2(T(n-1) - T(0)) = 4n - 4 + 2T(n-1) 
 	  \end{equation}
 	  \begin{equation}
-	    \frac{T(n)}{n+1} = \frac{T(n-1)}{n} + \frac{4n-4}{n(n+1)}
+	    nT(n) = (n+1)T(n-1) + 4(n-1)
 	  \end{equation}
-	  	  
-	  %Hasta aquí, estoy seguro de que ésta es la forma de resolverlo
 	  
-      Ahora consideramos $S(n) = \frac{T(n)}{n+1}$, y obtenemos la ecuación:
+	  %No entiendo muy bien los siguientes pasos, pero bueno...
+	  \begin{equation}
+	    n(T(n)-4) = (n+1)(T(n-1)-4) + 4n
+	  \end{equation}
+	  
+	  \begin{equation}
+	  	\frac{T(n)-4}{n+1} = \frac{T(n-1)-4}{n} + \frac{4}{n+1}
+	  \end{equation}
+	  
+      Ahora consideramos $S(n) = \frac{T(n)-4}{n+1}$, y obtenemos la ecuación:
       \begin{equation}
-        S(n) = S(n-1) + \frac{4}{n(n+1)}
+        S(n) = S(n-1) + \frac{4}{n+1}
       \end{equation}
       Desarrollando, obtenemos:
       \begin{equation}
-        S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i(i-1)}
+        S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i}
       \end{equation}
       
-      Claramente, esto es $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\\
-      $$T(n) = S(n) (n+1) = \mathcal{O}(log(n)) (n+1) = \mathcal{O}(nlog(n))$$
+      Claramente, $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\
+      $T(n) = S(n)(n+1) + 4 = \mathcal{O}(log(n)) (n+1) + 4 = \mathcal{O}(nlog(n))$
 
       \subsection{Implementación}
       Implementación en Ruby:
@@ -702,10 +709,10 @@ $$ T(n) = nc_1 + n-1 = n(c_1 + 1)-1\ \in \mathcal{O}(n)$$
 	
 	
 \subsection{Implementación}
-Presentamos la siguiente implementación en Ruby:
-      \small
-      \texttt{\input{compraventa.tex}}
-      \normalsize
+Presentamos la siguiente implementación en Ruby: \\
+  \small
+    \texttt{\input{compraventa.tex}}
+  \normalsize
 	
 	
 \end{document}

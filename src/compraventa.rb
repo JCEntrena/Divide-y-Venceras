@@ -58,7 +58,11 @@ end
 # - Posición del mínimo del vector (irrelevante). 
 # - Posición del máximo del vector (irrelevante). 
 
-puts [40,10,50,3,45,12].compraventa
+array = [40,10,50,3,45,12]
+
+compra, venta, min, max = array.compraventa
+
+puts "Momento de compra: #{compra}. Valor de compra: #{array.at(compra)} \nMomento de venta: #{venta}. Valor de venta: #{array.at(venta)}"
 
 
 
