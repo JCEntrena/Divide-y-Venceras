@@ -42,15 +42,15 @@ takePairs [] = []
 takePairs [x] = []
 takePairs (x:y:t) = (x, y) : takePairs t
 
-getEqPairs :: [(a, a)] -> [a]
+getEqPairs :: (Eq a) => [(a, a)] -> [a]
 getEqPairs [] = []
 getEqPairs ((x, y):t)
   | x /= y = getEqPairs t
-  | x == t = x : getEqPairs t 
+  | x == y = x : getEqPairs t 
 
-mayoritario :: [a] -> Maybe a
-mayoritario [] =      Nothing
-mayoritario [x] =     Just x
+mayoritario :: (Eq a) => [a] -> Maybe a
+mayoritario []  = Nothing
+mayoritario [x] = Just x
 mayoritario [x, y]
   | x /= y = Nothing
   | x == y = Just x
@@ -59,3 +59,6 @@ mayoritario xs = mayoritario rs
 
 {- Quedaría comprobar que el mayoritario que da la 
 función efectivamente lo es -}
+testMayoritario :: (Eq a) => [a] -> a -> Bool
+testMayoritario xs m = (freq > (div (length xs) 2))
+  where freq = length $ filter (==m) xs
