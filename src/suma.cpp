@@ -36,12 +36,15 @@ int suma_paralela(vector<int>& numeros) {
     if (numeros.size() == 1)
         return numeros[0];
     else {
+        // Calculamos el tamaño del nuevo vector como la mitad
+        // del antiguo (más uno si el tamaño era impar)
         vector<int> suma_pares(numeros.size()/2 + (numeros.size() % 2 == 1));
 
         #pragma omp parallel for
         for (int i = 0; i < suma_pares.size(); ++i) {
-            #pragma omp critical
-            suma_pares.at(i) = numeros.at(2*i) + (2*i+1 == numeros.size() ? 0 : numeros.at(2*i+1));
+            // Sumamos una pareja, en el caso del último elemento 
+            // si el tamaño es impar, lo dejamos tal cual
+            suma_pares[i] = numeros[2*i] + (2*i+1 == numeros.size() ? 0 : numeros[2*i+1]);
         }
 
         return suma_paralela(suma_pares);
