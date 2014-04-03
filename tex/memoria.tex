@@ -526,10 +526,10 @@ A continuación mostramos una implementación en el lenguaje Ruby:
 	  \begin{eqnarray*}
 	  \lefteqn{T(n) = 2n + T\bigg(\left\lceil \frac{n-1}{2} \right\rceil\bigg) + T\bigg(\left\lfloor \frac{n-1}{2}\right\rfloor\bigg) \approx 2n + 2T\bigg(\frac{n}{2}\bigg) \approx} \\
 	  && \approx 2n + 2n + 4T\bigg(\frac{n}{4}\bigg) = 4n + 4T\bigg(\frac{n}{4}\bigg)\approx 4n + 2n + 8T\bigg(\frac{n}{8}\bigg) = \\ 
-	  && = 6n + 8T\bigg(\frac{n}{8}\bigg) \approx \dots \approx 2nlog_2(n) + n T(0) = 2nlog_2(n) + n
+	  && = 6n + 8T\bigg(\frac{n}{8}\bigg) \approx \dots \approx 2nlog_2(n) + n T(0)
 	  \end{eqnarray*}
 	  
-      El caso medio del algoritmo es $\mathcal{O}(nlog(n)) $. Puede comprobarse siguiendo un razonamiento similar al aplicado para calcular el caso medio en \textit{Quicksort}, podemos analizar su eficiencia.
+      El caso medio del algoritmo es $\mathcal{O}(nlog(n)) $. Siguiendo un razonamiento similar al aplicado para calcular el caso medio en \textit{Quicksort}, podemos analizar su eficiencia.
     
       El algoritmo realiza dos particiones, una alrededor del pivote y otra alrededor de su pareja, ambas en tiempo $\mathcal{O}(n)$. Ahora, aplicamos el algoritmo
       en cada una de las dos parejas de listas asociadas resultantes. Cada elemento tendrá la misma posibilidad de ser elegido que los demás, es decir, $\frac{1}{n}$,
