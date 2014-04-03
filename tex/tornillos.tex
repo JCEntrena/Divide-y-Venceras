@@ -1,20 +1,5 @@
 % Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
 \noindent
-\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ ruby}} \\
-\mbox{}\textit{\textcolor{Brown}{\#encoding\ utf8}} \\
-\mbox{} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ Tornillos\ y\ tuercas.\ Un\ algoritmo:}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ Escogemos\ un\ tornillo\ pivote\ y\ dejamos\ las}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ tuercas\ menores\ en\ una\ lista,\ las\ mayores\ en\ otra}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ y\ encontramos\ su\ pareja.\ Utilizamos\ la\ pareja\ para}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ repartir\ los\ tornillos\ de\ igual\ forma.}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ Emparejamos\ las\ listas\ izquierdas\ y\ las\ derechas\ por}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ separado.\ Juntamos\ con\ el\ pivote\ en\ medio.}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ Eficiencia:\ caso\ medio\ T(n)\ =\ 2T(n/2)\ +\ O(n)\ =\textgreater{}\ O(n\ log\ n)}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ \ \ \ \ \ \ \ \ \ \ \ \ caso\ peor\ cuadrático}} \\
-\mbox{} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ (Esto\ es\ básicamente\ un\ quicksort,\ no?)}} \\
-\mbox{} \\
 \mbox{}\textbf{\textcolor{Blue}{def}}\ empareja\textcolor{BrickRed}{(}tornillos\textcolor{BrickRed}{,}\ tuercas\textcolor{BrickRed}{)} \\
 \mbox{}\ \ \textit{\textcolor{Brown}{\#\ Caso\ base}} \\
 \mbox{}\ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{[[],[]]}\ \textbf{\textcolor{Blue}{if}}\ tornillos\textcolor{BrickRed}{.}size\ \textcolor{BrickRed}{\textless{}}\ \textcolor{Purple}{1} \\
@@ -37,5 +22,4 @@
 \mbox{}\ \ \ \ tu$\_$izq\ \textcolor{BrickRed}{+}\ \textcolor{BrickRed}{[}pareja\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{+}\ tu$\_$der \\
 \mbox{}\ \ \textcolor{BrickRed}{]} \\
 \mbox{}\textbf{\textcolor{Blue}{end}} \\
-\mbox{} \\
-\mbox{}puts\ \textcolor{BrickRed}{(}empareja\ \textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{,}\ \textcolor{Purple}{5}\textcolor{BrickRed}{,}\ \textcolor{Purple}{3}\textcolor{BrickRed}{,}\ \textcolor{Purple}{6}\textcolor{BrickRed}{,}\ \textcolor{Purple}{1}\textcolor{BrickRed}{,}\ \textcolor{Purple}{4}\textcolor{BrickRed}{],}\ \textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{,}\ \textcolor{Purple}{2}\textcolor{BrickRed}{,}\ \textcolor{Purple}{5}\textcolor{BrickRed}{,}\ \textcolor{Purple}{1}\textcolor{BrickRed}{,}\ \textcolor{Purple}{6}\textcolor{BrickRed}{,}\ \textcolor{Purple}{3}\textcolor{BrickRed}{]).}to$\_$s
+\mbox{}

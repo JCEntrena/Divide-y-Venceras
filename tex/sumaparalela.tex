@@ -1,0 +1,24 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textcolor{ForestGreen}{int}\ \textbf{\textcolor{Black}{suma$\_$paralela}}\textcolor{BrickRed}{(}vector\textcolor{BrickRed}{\textless{}}\textcolor{ForestGreen}{int}\textcolor{BrickRed}{\textgreater{}\&}\ numeros\textcolor{BrickRed}{)}\ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}numeros\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{size}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{==}\ \textcolor{Purple}{1}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ numeros\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{else}}\ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Calculamos\ el\ tamaño\ del\ nuevo\ vector\ como\ la\ mitad}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ del\ antiguo\ (más\ uno\ si\ el\ tamaño\ era\ impar)}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{TealBlue}{vector\textless{}int\textgreater{}}\ \textbf{\textcolor{Black}{suma$\_$pares}}\textcolor{BrickRed}{(}numeros\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{size}}\textcolor{BrickRed}{()/}\textcolor{Purple}{2}\ \textcolor{BrickRed}{+}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}numeros\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{size}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{\%}\ \textcolor{Purple}{2}\ \textcolor{BrickRed}{==}\ \textcolor{Purple}{1}\textcolor{BrickRed}{));} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\ \ \ \ \ \ \ \ \#pragma}}\ omp\ parallel\ \textbf{\textcolor{Blue}{for}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ suma$\_$pares\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{size}}\textcolor{BrickRed}{();}\ \textcolor{BrickRed}{++}i\textcolor{BrickRed}{)}\ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Sumamos\ una\ pareja,\ en\ el\ caso\ del\ último\ elemento\ }} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ si\ el\ tamaño\ es\ impar,\ lo\ dejamos\ tal\ cual}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ suma$\_$pares\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ numeros\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{*}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{+}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textcolor{Purple}{2}\textcolor{BrickRed}{*}i\textcolor{BrickRed}{+}\textcolor{Purple}{1}\ \textcolor{BrickRed}{==}\ numeros\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{size}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{?}\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{:}\ numeros\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{*}i\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{]);} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textbf{\textcolor{Black}{suma$\_$paralela}}\textcolor{BrickRed}{(}suma$\_$pares\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}

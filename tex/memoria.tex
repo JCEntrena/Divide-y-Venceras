@@ -100,7 +100,7 @@ Divide y vencerás} % Subtitle
 
 \renewcommand{\abstractname}{Resumen} % Uncomment to change the name of the abstract to something else
 \begin{abstract}
-
+La técnica \textit{Divide y vencerás} permite desarrollar soluciones sencillas a problemas aparentemente complejos, descomponiéndolos en casos más simples de forma recursiva. Mostraremos algoritmos que resuelven varios problemas mediante esta estrategia, analizaremos su eficiencia y presentaremos algunas implementaciones en lenguajes de programación de alto nivel.
 \end{abstract}
 {\parskip=2pt
 \tableofcontents
@@ -144,10 +144,7 @@ del vector, para poder sumarlas), el mejor algoritmo que se puede ejecutar en un
 será de complejidad $\mathcal{O}(n)$. En el caso de un único core, por tanto, no supone ninguna
 mejora el realizar el algoritmo Divide y Vencerás; más aún, este algoritmo será más lento que el
 iterativo, por la necesidad de crear marcos de pila nuevos para cada llamada a la función.\\
-% (Comentario Mario)
-% La idea de aprovechar con un SIMD se aplica cuando el algoritmo queda escrito de abajo a arriba.
-% Pero se puede aprovechar un SIMD.
-Para un procesador vectorial (SIMD), es necesario modificar el algoritmo de forma que se puedan paralelizar las sumas de parejas de elementos. Para ello, 
+
 
 \subsection{Implementación}
 Implementación en Ruby:
@@ -160,6 +157,13 @@ Implementación en Haskell:
 
 \small
 \texttt{\input{suma2.tex}}
+\normalsize
+
+\subsection{Versión paralela}
+Para aprovechar las posibilidades de un procesador vectorial (SIMD), es necesario modificar el algoritmo de forma que se puedan paralelizar las sumas de parejas de elementos. Por tanto, se realizarán primero las sumas de pares de elementos en el vector inicial, se sumarán estos resultados en parejas y así sucesivamente. Una posible implementación en C++ paralelizada mediante OpenMP es:
+
+\small
+\texttt{\input{sumaparalela.tex}}
 \normalsize
 
 \section {Multiplicación de números grandes (adaptado a binario)}
