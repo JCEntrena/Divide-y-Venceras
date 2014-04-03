@@ -454,6 +454,8 @@ A continuación mostramos una implementación en el lenguaje Ruby:
 \normalsize
 
 \section {Tornillos y tuercas}
+  \subsection{Algoritmo}
+
     Tenemos dos listas cuyos elementos están emparejados con uno y sólo uno de los elementos de la otra lista.
     
     De nuevo, vamos a utilizar un procedimiento similar al usado por el \textit{Quicksort}.
@@ -490,6 +492,57 @@ A continuación mostramos una implementación en el lenguaje Ruby:
     \caption{Tornillos y tuercas}
     \label{TyT}
 \end{algorithm}
+  \subsection{Análisis de eficiencia.}
+      Dada la gran similitud de el algoritmo usado con el algoritmo \textit{Quicksort}, la eficiencia también será similar.
+      
+      En el peor de los casos, tenemos que el pivote(y su pareja) quedan al principio o al final de sus correspondientes listas, dejando una lista vacía y una lista de tamaño $n-1$. En este caso, tenemos una eficiencia cuadrática:
+      
+	  \begin{equation}
+	  	T(n) = 2n + T(0) + T(n-1) = 2n + 1 + T(n-1) = \dots = 2n^2 + n - 1
+	  \end{equation}
+      
+      Por otra parte, el mejor caso consigue dividir la lista por la mitad. En este caso, nos resuelve el problema con eficiencia $\mathcal{O}(nlog(n))$:
+      
+      % No estoy seguro de si ponerlo como "equation"
+	  %\begin{equation}
+	  	$T(n) = 2n + T(\left\lceil \frac{n-1}{2} \right\rceil) + T(\left\lfloor \frac{n-1}{2}\right\rfloor) \approx 2n + 2T(\frac{n}{2}) \approx 2n + 2n + 4T(\frac{n}{4}) = \\ = 4n + 4T(\frac{n}{4})\approx 4n + 2n + 8T(\frac{n}{8}) = 6n + 8T(\frac{n}{8}) \approx \dots \approx 2nlog_2(n) + n T(0) = 2nlog_2(n) + n$
+	  %\end{equation}
+      
+      El caso medio del algoritmo es $\mathcal{O}(nlog(n)) $. Puede comprobarse siguiendo un razonamiento similar al aplicado para calcular el caso medio en \textit{Quicksort}, podemos analizar su eficiencia.
+    
+      El algoritmo realiza dos particiones, una alrededor del pivote y otra alrededor de su pareja, ambas en tiempo $\mathcal{O}(n)$. Ahora, aplicamos el algoritmo
+      en cada una de las dos parejas de listas asociadas resultantes. Cada elemento tendrá la misma posibilidad de ser elegido que los demás, es decir, $\frac{1}{n}$,
+      con $n$, el número de elementos de las listas, por lo que podemos considerar:
+      \begin{equation}
+		T(n) = 2n + \frac{1}{n}\sum_{i=0}^{n-1}\left(T(i) + T(n-1-i) \right)
+      \end{equation}
+      
+      Al evaluarlo en n-1, queda:
+      \begin{equation}
+      	T(n-1) = 2(n-1) + \frac{1}{n-1}\sum_{i=0}^{n-2}\left(T(i) + T((n-2-i) \right)
+      \end{equation}
+      Sumando las ecuaciones anteriores multiplicando por $n$ la primera ecuación y por $-(n-1)$ la otra, obtenemos:
+      \begin{equation}
+        nT(n) - (n-1)T(n-1) = 2n^2 + 2\sum^{n-1}_{i=1} T(i) - 2(n-1)^2 - 2\sum_{i=0}^{n-2}T(i)
+      \end{equation}
+      Simplificando, nos quedaría:
+	  \begin{equation}
+	    nT(n) - (n-1)T(n-1) = 4n-2 + 2(T(n-1) - T(0)) = 4n + 2T(n-1) 
+	  \end{equation}
+	  \begin{equation}
+	    \frac{T(n)}{n+1} = \frac{T(n-1)}{n} + 4
+	  \end{equation}
+      Ahora consideramos $S(n) = \frac{T(n)}{n+1}$, y obtenemos la ecuación:
+      \begin{equation}
+        S(n) = S(n-1) + \frac{4}{n+1}
+      \end{equation}
+      Desarrollando, obtenemos:
+      \begin{equation}
+        S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i}
+      \end{equation}
+      
+      Claramente, esto es $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\
+      $T(n) = S(n) (n+1) = \mathcal{O}(log(n)) (n+1) = \mathcal{O}(nlog(n))$
 
 \section {Compraventa de acciones}
 \subsection{Algoritmo}
