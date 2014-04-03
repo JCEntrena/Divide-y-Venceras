@@ -511,12 +511,8 @@ A continuación mostramos una implementación en el lenguaje Ruby:
 	      \texttt{mayores de b}=$\{y\in b : y>pivote\}$\\
 	      \texttt{menores de a}=$\{x\in a : x<pareja\}$\\
 	      \texttt{mayores de a}=$\{x\in a : x>pareja\}$\\}
-	  \IF{\#\texttt{menores de b} $\neq$ 0}
-	    \STATE{\texttt{Ordenar(menores de b, menores de a)}}
-	  \ENDIF \\
-	  \IF{\#\texttt{mayores de b} $\neq$ 0}
-	    \STATE{\texttt{Ordenar(mayores de b, mayores de a)}}
-	  \ENDIF \\
+	    \STATE{\texttt{Ordenar(menores de b, menores de a)}\\
+	      \texttt{Ordenar(mayores de b, mayores de a)}}\\
 	  
 	  \RETURN {\texttt{[(menores de a + pivote + mayores de a), \\ (menores de b + pareja + mayores de b)]}}
 	  \ENDIF \\\
