@@ -147,10 +147,7 @@ iterativo, por la necesidad de crear marcos de pila nuevos para cada llamada a l
 % (Comentario Mario)
 % La idea de aprovechar con un SIMD se aplica cuando el algoritmo queda escrito de abajo a arriba.
 % Pero se puede aprovechar un SIMD.
-Para un procesador vectorial (SIMD), de nuevo encontramos que el algoritmo iterativo convencional
-(recorrer todo el vector e ir acumulando en una variable suma) sería más eficiente que el Divide y Vencerás.
-Únicamente encontraríamos mejora si el computador fuese de tipo MIMD, ya que en dicho caso podríamos crear
-varias hebras y que cada una de ellas se ocupara de atender una llamada a la recurrencia en un procesador distinto.
+Para un procesador vectorial (SIMD), es necesario modificar el algoritmo de forma que se puedan paralelizar las sumas de parejas de elementos. Para ello, 
 
 \subsection{Implementación}
 Implementación en Ruby:
