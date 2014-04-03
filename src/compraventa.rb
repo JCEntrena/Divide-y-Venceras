@@ -33,8 +33,8 @@ class Array
         min_dcha += size/2
         max_dcha += size/2
 
-        if (self.at(maximal_izq) - self.at(minimal_izq)) < 
-                (self.at(maximal_dcha) - self.at(minimal_dcha))
+        if (self[maximal_izq] - self[minimal_izq]) < 
+            (self[maximal_dcha] - self[minimal_dcha])
             minimal = minimal_dcha
             maximal = maximal_dcha
         else 
@@ -42,15 +42,15 @@ class Array
             maximal = maximal_izq
         end 
 
-        if (self.at(maximal) - self.at(minimal)) < 
-                (self.at(max_dcha) - self.at(min_izq))
+        if (self[maximal] - self[minimal]) < 
+            (self[max_dcha] - self[min_izq])
             maximal = max_dcha
             minimal = min_izq
         end
         
         # Recalculamos el mínimo y máximo.  
-        min = self.at(min_izq) < self.at(min_dcha) ? min_izq : min_dcha
-        max = self.at(max_izq) > self.at(max_dcha) ? max_izq : max_dcha
+        min = self[min_izq] < self[min_dcha] ? min_izq : min_dcha
+        max = self[max_izq] > self[max_dcha] ? max_izq : max_dcha
 
         [minimal, maximal, min, max] 
     end 
