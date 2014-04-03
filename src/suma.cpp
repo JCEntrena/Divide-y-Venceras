@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <numeric>
+#include <omp.h>
 using namespace std;
 typedef vector<int>::iterator vit;
 
@@ -31,6 +32,21 @@ int suma_dividida(vit inicio, vit final) {
     }
 }
 
+int suma_paralela(vector<int>& numeros) {
+    if (numeros.size() == 1)
+        return numeros[0];
+    else {
+        vector<int> suma_pares(numeros.size()/2 + (numeros.size() % 2 == 1));
+
+        #pragma omp parallel for
+        for (int i = 0; i < suma_pares.size(); ++i) {
+            #pragma omp critical
+            suma_pares.at(i) = numeros.at(2*i) + (2*i+1 == numeros.size() ? 0 : numeros.at(2*i+1));
+        }
+
+        return suma_paralela(suma_pares);
+    }
+}
 
 int main() {
     vector<int> ejemplo(20);
@@ -38,6 +54,7 @@ int main() {
     std::iota(ejemplo.begin(), ejemplo.end(), 1);
 
     cout << suma_dividida(ejemplo.begin(), --ejemplo.end()) << 
+        " = " << suma_paralela(ejemplo) << 
         " = " << suma_bucle(ejemplo.begin(), ejemplo.end()) << 
         " = " << std::accumulate(ejemplo.begin(), ejemplo.end(), 0) << endl;
 }
