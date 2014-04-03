@@ -1,4 +1,4 @@
-# Eficiencia de algoritmos.
+# Algoritmos Divide y vencerás.
 # makefile.
 # Basado en: http://stackoverflow.com/questions/9787160/makefile-that-compiles-all-cpp-files-in-a-directory-into-separate-executable
 
