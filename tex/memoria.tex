@@ -546,26 +546,30 @@ A continuación mostramos una implementación en el lenguaje Ruby:
       
       Al evaluarlo en $n-1$, queda:
       \begin{equation}
-      	T(n-1) = 2(n-1) + \frac{1}{n-1}\sum_{i=0}^{n-2}\left(T(i) + T((n-2-i) \right)
+      	T(n-1) = 2(n-1) + \frac{1}{n-1}\sum_{i=0}^{n-2}\left(T(i) + T(n-2-i) \right)
       \end{equation}
+      
       Sumando las ecuaciones anteriores multiplicando por $n$ la primera ecuación y por $-(n-1)$ la otra, obtenemos:
       \begin{equation}
         nT(n) - (n-1)T(n-1) = 2n^2 + 2\sum^{n-1}_{i=1} T(i) - 2(n-1)^2 - 2\sum_{i=0}^{n-2}T(i)
       \end{equation}
       Simplificando, nos quedaría:
 	  \begin{equation}
-	    nT(n) - (n-1)T(n-1) = 4n-2 + 2(T(n-1) - T(0)) = 4n + 2T(n-1) 
+	    nT(n) - (n-1)T(n-1) = 4n-2 + 2(T(n-1) - T(0)) = 4n - 4 + 2T(n-1) 
 	  \end{equation}
 	  \begin{equation}
-	    \frac{T(n)}{n+1} = \frac{T(n-1)}{n} + 4
+	    \frac{T(n)}{n+1} = \frac{T(n-1)}{n} + \frac{4n-4}{n(n+1)}
 	  \end{equation}
+	  	  
+	  %Hasta aquí, estoy seguro de que ésta es la forma de resolverlo
+	  
       Ahora consideramos $S(n) = \frac{T(n)}{n+1}$, y obtenemos la ecuación:
       \begin{equation}
-        S(n) = S(n-1) + \frac{4}{n+1}
+        S(n) = S(n-1) + \frac{4}{n(n+1)}
       \end{equation}
       Desarrollando, obtenemos:
       \begin{equation}
-        S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i}
+        S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i(i-1)}
       \end{equation}
       
       Claramente, esto es $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\
