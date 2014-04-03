@@ -59,8 +59,3 @@ compra, venta, min, max = array.compraventa
 puts "Momento de compra: #{compra}. Valor de compra: #{array.at(compra)} \nMomento de venta: #{venta}. Valor de venta: #{array.at(venta)}"
 
 
-
-
-
-
-
