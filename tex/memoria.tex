@@ -112,11 +112,11 @@ Divide y vencerás} % Subtitle
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\REQUIRE \ \\
-        	\texttt{v}, lista de $n$ números\\
-     	\IF{$n$==1}
+        	\texttt{v}, vector de $n$ números\\\
+     	\IF{$n$=1}
 	  \RETURN {\texttt{v[0]}}
 	\ELSE
-	  \RETURN {\texttt{Suma(\{v[1]\ldots v[n/2]\}) + Suma (\{v[n/2+1]\ldots v[n]\})}}
+	  \RETURN {\texttt{suma(\{v[1]\ldots v[n/2]\}) + suma(\{v[n/2+1]\ldots v[n]\})}}
     	\ENDIF \\\
 	\end{algorithmic}
     \caption{Suma de $n$ números}
@@ -168,23 +168,25 @@ Implementación en Haskell:
 \section {Multiplicación de números grandes (adaptado a binario)}
 \subsection{Algoritmo}
 Llamamos longitud en bits de un número entero positivo $x=x_{n}x_{n-1}\ldots x_1)_b \quad \\ x_i \in \{0,1\}$
-a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
+a $\max\{i\in \{1\ldots n\} : x_i = 1\}$.
 % (Comentario Mario)
 % ¿Por qué usamos las rotaciones en lugar de desplazamientos?
-Denotamos por \texttt{x $>>$ y} y \texttt{x $<<$ y} a las rotaciones a derecha e izquierda $y$ posiciones
+Denotamos por \texttt{x $>>$ y}, \texttt{x $<<$ y} a las rotaciones a derecha e izquierda $y$ posiciones
 de los bits de un número entero $x$.
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
 	  \REQUIRE \ \\
 	  \texttt{x,y, números enteros positivos}\\\
-        	
 	  % (Comentario Mario)
 	  % ¿Y sustituir esto por signo = sgn(xy), o algo parecido?
+	  % ¿Si multiplico los números y les hago el signo, para qué quiero el algoritmo? xDDDD
+	  %	Además, suponemos que comprobar si un número es positivo o negativo será comprobar
+	  % 	su bit más significativo, lo que es O(1)
 	  \IF{[x<0 \AND y<0] \OR [x>0 \AND y>0]}
-	    \STATE{\texttt{signo=}1}
+	    \STATE{\texttt{signo $\leftarrow$ 1}}
 	  \ELSE
-	    \STATE{\texttt{signo=}-1}
-	  \ENDIF\\\
+	    \STATE{\texttt{signo $\leftarrow$ -1}}
+	  \ENDIF\\
 	  \STATE{\texttt{(x,y):=(|x|,|y|)}}
 	  \STATE{\texttt{n}:= menor de las longitudes en bits de \texttt{x,y}}
 	  \\\
@@ -193,12 +195,11 @@ de los bits de un número entero $x$.
 	  \ELSE
 	    \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}}
 	    \STATE{\texttt{(b,d):= $\left\lfloor \frac{n}{2}\right\rfloor$} bits inferiores de \texttt{(x,y)}}
-	    \STATE{Calculamos \texttt{a$\cdot$c}, \texttt{b$\cdot$d} y \texttt{(a-b)$\cdot$(d-c)} llamando recursivamente al algoritmo}
+	    \STATE{Hacemos \texttt{a$\cdot$c}; \texttt{b$\cdot$d}; \texttt{(a-b)$\cdot$(d-c)} llamando recursivamente al algoritmo}
 	  \ENDIF \\\
-	  \RETURN\\\ $\bigg( ac << (\left\lceil n/2 \right\rceil \cdot 2) +
+	  \RETURN\\\ \small$\bigg( ac << (\left\lceil n/2 \right\rceil \cdot 2) +
 	    \bigg[(a-b)(d-c) +ac +bd\bigg] << \left\lfloor n/2\right\rfloor + 
-	    bd \bigg) \cdot \texttt{signo}$
-	  
+	    bd \bigg) \cdot \texttt{signo}$\normalsize	  
 	\end{algorithmic}
     \caption{Algoritmo de Karatsuba}
     \label{multiplicacion}
@@ -233,19 +234,18 @@ Para resolver la recurrencia, efectuamos el cambio de variable $n=2^k$:
  T(2^k)=3\cdot T(2^{k-1}) + M\cdot 2^k
 \end{equation}
 y resolvemos: 
-
 \begin{equation}
 x_k=3\cdot x_{k-1}+M\cdot 2^k
 \end{equation}
 Calculamos una solución particular de la recurrencia no homogénea:
 $$A\cdot 2^k - 3\cdot A \cdot 2^{k-1}=-A\cdot 2^{k-1}=M2^k \leftrightarrow A=-2M$$
 y por tanto: $x_k=-2M \cdot 2^k$ es solución particular.\\
+
 Calculamos ahora la solución general a la recurrencia homogénea:
 $$ x_k-3\cdot x_{k-1}=0$$
 que tiene por polinomio característico a $x-3$. Por tanto, la solución general de la
 recurrencia homogénea es:
-$$ x_k= p\cdot 3^k\qquad p\in\mathbb{R}$$
-\\\
+$$ x_k= p\cdot 3^k\qquad p\in\mathbb{R}$$\\
 Concluimos que la solución a la recurrencia \ref{prodcv} es: 
 \begin{equation}
 x_k = p \cdot 2^k + q \cdot 3^k \qquad p,q \in \mathbb{R}
@@ -288,12 +288,12 @@ A continuación, una implementación en Python:
 		\texttt{iguales}=$\{x\in v : x=pivote\}$\\
 		\texttt{mayores}=$\{x\in v : x>pivote\}$}
 	  \\\
-	  \IF{\texttt{k<\#menores}}
+	  \IF{\texttt{k <\space\#menores}}
 	    \RETURN {\texttt{k-ésimo(menores,k)}}
-	  \ELSIF{\texttt{k<(\#menores+\#iguales)}}
+	  \ELSIF{\texttt{k <\space(\#menores + \#iguales)}}
 	    \RETURN {pivote}
 	  \ELSE
-	    \RETURN {\texttt{k-ésimo(mayores,k-(\#menores+\#iguales))}}
+	    \RETURN {\texttt{k-ésimo(mayores,k-(\#menores + \#iguales))}}
 	  \ENDIF
 	\end{algorithmic}
       \caption{$k$-ésimo menor elemento de un vector. Primera versión.}
@@ -367,7 +367,7 @@ A continuación, una implementación en Python:
     
     \subsubsection{Elección de la pseudomediana}
       El elegir la mediana siguiendo el algoritmo propuesto anteriormente permite escoger un pivote que sea lo suficientemente cercano a la verdadera mediana.
-      Acotmos el número de elementos menores que la pseudomediana. Sabemos que una mediana así elegida nos permite afirmar que, de los elementos de las sublistas
+      Acotamos el número de elementos menores que la pseudomediana. Sabemos que una mediana así elegida nos permite afirmar que, de los elementos de las sublistas
       con medianas menores al pivote, hasta $\frac{5}{2} \lceil \frac{n}{5} \rceil$ pueden ser menores. De los elementos de las sublistas con medianas mayores,
       sólo 2 de ellos podrían ser menores, dando en total $ \lceil \frac{n}{5} \rceil$ elementos menores. Añadimos además los dos elementos de la sublista menores a la pseudomediana.
       
