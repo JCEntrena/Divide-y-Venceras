@@ -1,0 +1,35 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ ruby}} \\
+\mbox{}\textit{\textcolor{Brown}{\#encoding\ utf8}} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Búsqueda\ del\ k-ésimo\ menor\ elemento.\ Un\ algoritmo:}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Encontramos\ el\ mínimo\ elemento\ y\ lo\ eliminamos\ (para}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ ello\ lo\ sustituimos\ por\ el\ último\ y\ eliminamos\ este).}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Buscamos\ el\ (k-1)-ésimo\ elemento\ del\ vector}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ resultante.}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Eficiencia:\ O(nk)\ (?)}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{class}}\ Array \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{def}}\ k$\_$menor\textcolor{BrickRed}{(}k\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i$\_$min\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{nil}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Esto\ es\ O(n)}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ each$\_$with$\_$index\ \textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}e\textcolor{BrickRed}{,}\ i\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i$\_$min\ \textcolor{BrickRed}{=}\ i\ \textbf{\textcolor{Blue}{if}}\ i$\_$min\textcolor{BrickRed}{.}\textbf{\textcolor{Blue}{nil}}\textcolor{BrickRed}{?}\ \textbf{\textcolor{Blue}{or}}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}i$\_$min\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textgreater{}}\ e \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ k\ \textcolor{BrickRed}{\textless{}}\ \textcolor{Purple}{2} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}i$\_$min\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{else}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}i$\_$min\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ last \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Duda\ importante:\ ¿Los\ elementos\ repetidos\ se\ consideran\ como}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ elementos\ "{}distintos"{},\ o\ se\ han\ de\ eliminar\ todos\ a\ la\ vez?}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{0}\ \textcolor{BrickRed}{..}\ size\ \textcolor{BrickRed}{-}\ \textcolor{Purple}{1}\textcolor{BrickRed}{].}k$\_$menor\textcolor{BrickRed}{(}k\ \textcolor{BrickRed}{-}\ \textcolor{Purple}{1}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\textbf{\textcolor{Blue}{end}} \\
+\mbox{} \\
+\mbox{}puts\ \textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{,}\textcolor{Purple}{4}\textcolor{BrickRed}{,}\textcolor{Purple}{1}\textcolor{BrickRed}{,}\textcolor{Purple}{1}\textcolor{BrickRed}{,}\textcolor{Purple}{2}\textcolor{BrickRed}{,}\textcolor{Purple}{3}\textcolor{BrickRed}{,}\textcolor{Purple}{4}\textcolor{BrickRed}{].}k$\_$menor\ \textcolor{Purple}{2}

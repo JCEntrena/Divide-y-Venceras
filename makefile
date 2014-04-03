@@ -8,14 +8,17 @@ DATA=./data
 PLOT=./plots
 FIT=./regressionPlots
 TEX=./tex
-FLAGS=-std=c++0x -Wall
+FLAGS=-std=c++0x -Wall -fopenmp
 
 # make all: Compilar todos los programas 
 all: $(patsubst $(SRC)/%.cpp, $(BIN)/%, $(wildcard $(SRC)/*.cpp))
+rbtex: $(patsubst $(SRC)/%.rb, $(TEX)/%.tex, $(wildcard $(SRC)/*.rb))
 
 $(BIN)/%: $(SRC)/%.cpp
 	g++ $< -o $@ $(FLAGS)
 
+$(TEX)/%.tex: $(SRC)/%.rb
+	source-highlight -f latexcolor -i $< -o $@
 
 # Limpieza de los ejecutables
 clean:
