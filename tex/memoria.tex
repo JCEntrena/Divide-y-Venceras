@@ -165,8 +165,7 @@ Implementación en Haskell:
 \texttt{\input{suma2.tex}}
 \normalsize
 
-\section {Multiplicación de números grandes (adaptado a 
-binario)}
+\section {Multiplicación de números grandes (adaptado a binario)}
 \subsection{Algoritmo}
 Llamamos longitud en bits de un número entero positivo $x=x_{n}x_{n-1}\ldots x_1)_b \quad \\ x_i \in \{0,1\}$
 a $\max\{i\in \{1\ldots n\} : x_i = 1\}$.
@@ -386,16 +385,16 @@ A continuación, una implementación en Python:
       Lo que nos lleva, por inducción suponiendo $T(n) = cn$, a que el algoritmo es lineal.
       
 \subsection{Implementación}
-A continuación mostramos una implementación en el lenguaje Ruby:
+A continuación mostramos una implementación en el lenguaje Ruby, que usa como pivote el primer elemento del vector:
 
 \small
 \texttt{\input{kesimomenor2.tex}}
 \normalsize
 
-y una implementación en Haskell:
+y una implementación en Haskell, usando ahora la pseudomediana como pivote:
 
 \small
-\texttt{\input{kesimo_menor.tex}}
+\texttt{\input{kesimo_menor_medians.tex}}
 \normalsize
 
 

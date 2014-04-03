@@ -1,4 +1,4 @@
-# Eficiencia de algoritmos.
+# Algoritmos Divide y vencerás.
 # makefile.
 # Basado en: http://stackoverflow.com/questions/9787160/makefile-that-compiles-all-cpp-files-in-a-directory-into-separate-executable
 
@@ -13,6 +13,7 @@ FLAGS=-std=c++0x -Wall -fopenmp
 # make all: Compilar todos los programas 
 all: $(patsubst $(SRC)/%.cpp, $(BIN)/%, $(wildcard $(SRC)/*.cpp))
 rbtex: $(patsubst $(SRC)/%.rb, $(TEX)/%.tex, $(wildcard $(SRC)/*.rb))
+hstex: $(patsubst $(SRC)/%.hs, $(TEX)/%.tex, $(wildcard $(SRC)/*.hs))
 
 $(BIN)/%: $(SRC)/%.cpp
 	g++ $< -o $@ $(FLAGS)
