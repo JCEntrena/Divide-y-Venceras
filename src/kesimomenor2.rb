@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 #encoding utf8
 
-# Creo que es eficiencia O(n**2) en el peor caso y O(n) en el medio.
-
 class Array
   def kesimo (k)
     # Esto tiene eficiencia O(n).
