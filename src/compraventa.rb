@@ -19,8 +19,10 @@ class Array
         # De no ser así, llamamos recurvivamente a la 
         # función con las dos mitades izquierda y derecha.     
 
-        minimal_izq, maximal_izq, min_izq, max_izq = self[0 .. size/2-1].compraventa 
-        minimal_dcha, maximal_dcha, min_dcha, max_dcha = self[size/2 .. size - 1].compraventa
+        minimal_izq, maximal_izq, min_izq, max_izq = 
+            self[0 .. size/2-1].compraventa 
+        minimal_dcha, maximal_dcha, min_dcha, max_dcha = 
+            self[size/2 .. size - 1].compraventa
 
         # Ajustamos las posiciones de la parte derecha para
         # que se refieran al array total, y no a la mitad 
@@ -31,7 +33,8 @@ class Array
         min_dcha += size/2
         max_dcha += size/2
 
-        if (self[maximal_izq] - self[minimal_izq]) < (self[maximal_dcha] - self[minimal_dcha])
+        if (self[maximal_izq] - self[minimal_izq]) < 
+            (self[maximal_dcha] - self[minimal_dcha])
             minimal = minimal_dcha
             maximal = maximal_dcha
         else 
@@ -39,7 +42,8 @@ class Array
             maximal = maximal_izq
         end 
 
-        if (self[maximal] - self[minimal]) < (self[max_dcha] - self[min_izq])
+        if (self[maximal] - self[minimal]) < 
+            (self[max_dcha] - self[min_izq])
             maximal = max_dcha
             minimal = min_izq
         end
@@ -57,10 +61,5 @@ array = [40,10,50,3,45,12]
 compra, venta, min, max = array.compraventa
 
 puts "Momento de compra: #{compra}. Valor de compra: #{array.at(compra)} \nMomento de venta: #{venta}. Valor de venta: #{array.at(venta)}"
-
-
-
-
-
 
 
