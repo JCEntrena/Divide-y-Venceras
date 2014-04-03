@@ -5,25 +5,15 @@
 BIN=./bin
 SRC=./src
 DATA=./data
-PLOT=./plots
-FIT=./regressionPlots
 TEX=./tex
 FLAGS=-std=c++0x -Wall -fopenmp
 
 # make all: Compilar todos los programas 
-all: $(patsubst $(SRC)/%.cpp, $(BIN)/%, $(wildcard $(SRC)/*.cpp))
-rbtex: $(patsubst $(SRC)/%.rb, $(TEX)/%.tex, $(wildcard $(SRC)/*.rb))
-hstex: $(patsubst $(SRC)/%.hs, $(TEX)/%.tex, $(wildcard $(SRC)/*.hs))
 
-$(BIN)/%: $(SRC)/%.cpp
-	g++ $< -o $@ $(FLAGS)
+.PHONY: tex
 
-$(TEX)/%.tex: $(SRC)/%.rb
-	source-highlight -f latexcolor -i $< -o $@
-
-$(TEX)/%.tex: $(SRC)/%.hs
-	source-highlight -f latexcolor -i $< -o $@
-
+tex:
+	./gentex.sh
 # Limpieza de los ejecutables
 clean:
 	rm $(BIN)/*

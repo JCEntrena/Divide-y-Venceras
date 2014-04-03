@@ -1,0 +1,30 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textbf{\textcolor{Blue}{import}}\ Data\textcolor{BrickRed}{.}\textcolor{ForestGreen}{List} \\
+\mbox{}\textbf{\textcolor{Blue}{import}}\ Data\textcolor{BrickRed}{.}List\textcolor{BrickRed}{.}\textcolor{ForestGreen}{Split} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\{-}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ Caso\ medio\ lineal,\ caso\ peor\ cuadrático.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ Toma\ un\ pivote,\ parte\ la\ lista\ en\ tres\ partes\ y\ toma\ la\ parte\ del\ késimo\ elemento.\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ -\}}} \\
+\mbox{}kesimo\ \textcolor{BrickRed}{::}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{Ord}\ a\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{=\textgreater{}}\ \textcolor{BrickRed}{[}a\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{-\textgreater{}}\ \textcolor{ForestGreen}{Int}\ \textcolor{BrickRed}{-\textgreater{}}\ \textcolor{ForestGreen}{Maybe}\ a \\
+\mbox{}kesimo\ \textcolor{BrickRed}{[]}\ \textbf{\textcolor{Blue}{$\_$}}\ \textcolor{BrickRed}{=}\ \textcolor{ForestGreen}{Nothing} \\
+\mbox{}kesimo\ xs\ k \\
+\mbox{}\ \ \textcolor{BrickRed}{$|$}\ k\ \textcolor{BrickRed}{\textless{}}\ parte1\ \textcolor{BrickRed}{=}\ kesimo\ menores\ k \\
+\mbox{}\ \ \textcolor{BrickRed}{$|$}\ k\ \textcolor{BrickRed}{\textless{}}\ parte2\ \textcolor{BrickRed}{=}\ \textcolor{ForestGreen}{Just}\ pivote\  \\
+\mbox{}\ \ \textcolor{BrickRed}{$|$}\ otherwise\ \ \textcolor{BrickRed}{=}\ kesimo\ mayores\ \textcolor{BrickRed}{(}k\textcolor{BrickRed}{-}parte2\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{where}}\ menores\ \textcolor{BrickRed}{=}\ filter\ \textcolor{BrickRed}{(\textless{}}\ pivote\textcolor{BrickRed}{)}\ xs \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ mayores\ \textcolor{BrickRed}{=}\ filter\ \textcolor{BrickRed}{(\textgreater{}}\ pivote\textcolor{BrickRed}{)}\ xs \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ iguales\ \textcolor{BrickRed}{=}\ filter\ \textcolor{BrickRed}{(==}pivote\textcolor{BrickRed}{)}\ xs \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ parte1\ \ \textcolor{BrickRed}{=}\ length\ menores \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ parte2\ \ \textcolor{BrickRed}{=}\ parte1\ \textcolor{BrickRed}{+}\ \textcolor{BrickRed}{(}length\ iguales\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ pivote\ \ \textcolor{BrickRed}{=}\ medianOfMedians\ xs \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\{-}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ Elección\ de\ la\ pseudomediana.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ Partimos\ la\ lista\ en\ sublistas\ de\ 5\ elementos,\ obtenemos\ la\ mediana\ y\ formamos\ nueva\ lista.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ -\}}} \\
+\mbox{}medianOfMedians\ \textcolor{BrickRed}{::}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{Ord}\ a\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{=\textgreater{}}\ \textcolor{BrickRed}{[}a\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{-\textgreater{}}\ a \\
+\mbox{}medianOfMedians\ \textcolor{BrickRed}{[}x\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ x \\
+\mbox{}medianOfMedians\ xs\ \ \textcolor{BrickRed}{=}\ medianOfMedians\ \textcolor{BrickRed}{\$}\ map\ median\ \textcolor{BrickRed}{(}chunksOf\ \textcolor{Purple}{5}\ xs\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \textbf{\textcolor{Blue}{where}}\ median\ xs\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{(}sort\ xs\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{!!}\ \textcolor{BrickRed}{(}div\ \textcolor{BrickRed}{(}length\ xs\textcolor{BrickRed}{)}\ \textcolor{Purple}{2}\textcolor{BrickRed}{)}
