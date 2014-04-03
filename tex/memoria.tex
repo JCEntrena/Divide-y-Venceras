@@ -671,10 +671,10 @@ Podemos apuntar que, como esta recurrencia es la misma que la obtenida en el alg
 			\REQUIRE \ \\
 				\texttt{v}, vector de $n$ precios\\\
 			\IF{\texttt{\#v = 1}}
-			  \STATE{\texttt{(i\_compra,i\_venta,min,max) $\leftarrow$ (0,0,v[0],v[0])}}
+			  \STATE{\texttt{(i\_compra,i\_venta,min,max) $\leftarrow$ (0,0,0,0)}}
 			\ELSE
-			  \STATE{\texttt{L=\{v[0],\ldots, v[$\frac{n}{2}$]\}}}
-		          \STATE{\texttt{R=\{v[$\frac{n}{2}+1$],\ldots v[n-1]\}}}
+			  \STATE{\texttt{L=\{v[0],\ldots, v[$\frac{n}{2}-1$]\}}}
+		          \STATE{\texttt{R=\{v[$\frac{n}{2}$],\ldots v[n-1]\}}}
 				\STATE{Llamamos recursivamente a la función sobre \texttt{L} y \texttt{R}}
 				\STATE{\texttt{(i\_compra,i\_venta)$\leftarrow (i,j) | $ v[j]-v[i]\\\qquad es máximo de las tres ganancias}}
 				\STATE{\texttt{(min,max)$\leftarrow \bigg(\min(min_L, min_R),\max(max_L, max_R)\bigg)$}}
