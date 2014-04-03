@@ -1,0 +1,21 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\{-}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ Sea\ un\ monoide\ (A,f)\ para\ el\ que\ z\ es\ un\ elemento\ neutro.\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ Es\ decir,\ tenemos\ que:\ (f\ a\ (f\ b\ c))\ =\ (f\ (f\ a\ b)\ c),\ y\ además,\ (f\ z\ a)\ =\ a.\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ Para\ comprimir\ una\ lista,\ podemos\ comprimir\ cada\ una\ de\ las\ mitades\ de\ la\ lista\ y\ unirlas.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ Usamos\ la\ técnica\ Divide\ y\ Vencerás.}} \\
+\mbox{}\textit{\textcolor{Brown}{-\}}} \\
+\mbox{}foldDivide\ \textcolor{BrickRed}{::}\ \textcolor{BrickRed}{(}a\ \textcolor{BrickRed}{-\textgreater{}}\ a\ \textcolor{BrickRed}{-\textgreater{}}\ a\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{-\textgreater{}}\ a\ \textcolor{BrickRed}{-\textgreater{}}\ \textcolor{BrickRed}{[}a\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{-\textgreater{}}\ a \\
+\mbox{}foldDivide\ f\ z\ \textcolor{BrickRed}{[]}\ \textcolor{BrickRed}{=}\ z \\
+\mbox{}foldDivide\ f\ z\ \textcolor{BrickRed}{[}x\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ x \\
+\mbox{}foldDivide\ f\ z\ xs\ \textcolor{BrickRed}{=}\ f\ \textcolor{BrickRed}{(}foldDivide\ f\ z\ as\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{(}foldDivide\ f\ z\ bs\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \textbf{\textcolor{Blue}{where}}\ \textcolor{BrickRed}{(}as\textcolor{BrickRed}{,}bs\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{=}\ splitAt\ \textcolor{BrickRed}{(}div\ \textcolor{BrickRed}{(}length\ xs\textcolor{BrickRed}{)}\ \textcolor{Purple}{2}\textcolor{BrickRed}{)}\ xs \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\{-}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ La\ suma\ buscada\ es\ el\ caso\ particular\ de\ la\ suma\ en\ el\ grupo\ abeliano\ de\ los\ enteros,}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ con\ (+)\ como\ operación\ y\ 0\ como\ elemento\ neutro.}} \\
+\mbox{}\textit{\textcolor{Brown}{-\}}} \\
+\mbox{}sumDivide\ \textcolor{BrickRed}{::}\ \textcolor{BrickRed}{[}\textcolor{ForestGreen}{Int}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{-\textgreater{}}\ \textcolor{ForestGreen}{Int} \\
+\mbox{}sumDivide\ \textcolor{BrickRed}{=}\ foldDivide\ \textcolor{BrickRed}{(+)}\ \textcolor{Purple}{0}

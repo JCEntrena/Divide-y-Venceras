@@ -1,4 +1,4 @@
-%%%
+% %%%
 % Modificación de una plantilla de Latex para adaptarla al castellano.
 %%%
 
@@ -152,8 +152,21 @@ Para un procesador vectorial (SIMD), de nuevo encontramos que el algoritmo itera
 Únicamente encontraríamos mejora si el computador fuese de tipo MIMD, ya que en dicho caso podríamos crear
 varias hebras y que cada una de ellas se ocupara de atender una llamada a la recurrencia en un procesador distinto.
 
+\subsection{Implementación}
+Implementación en Ruby:
 
-\section {Multiplicación de números grandes (adaptado a binario)}
+\small
+\texttt{\input{suma.tex}}
+\normalsize
+
+Implementación en Haskell:
+
+\small
+\texttt{\input{suma2.tex}}
+\normalsize
+
+\section {Multiplicación de números grandes (adaptado a 
+binario)}
 \subsection{Algoritmo}
 Llamamos longitud en bits de un número entero positivo $x=x_{n}x_{n-1}\ldots x_1)_b \quad \\ x_i \in \{0,1\}$
 a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
@@ -179,18 +192,27 @@ de los bits de un número entero $x$.
 	  \IF{\texttt{longitud} $<$ 2}
 	    \RETURN{$x\cdot y \cdot \texttt{signo}$}
 	  \ELSE
-	    \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}\\
-		 \texttt{(b,d):= $\left\lfloor \frac{n}{2}\right\rfloor$} bits inferiores de \texttt{(x,y)}}
-	    \STATE{Calculamos \texttt{a$\cdot$c} y \texttt{b$\cdot$d} llamando recursivamente al algoritmo}
+	    \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}}
+	    \STATE{\texttt{(b,d):= $\left\lfloor \frac{n}{2}\right\rfloor$} bits inferiores de \texttt{(x,y)}}
+	    \STATE{Calculamos \texttt{a$\cdot$c}, \texttt{b$\cdot$d} y \texttt{(a-b)$\cdot$(d-c)} llamando recursivamente al algoritmo}
 	  \ENDIF \\\
 	  \RETURN\\\ $\bigg( ac << (\left\lceil n/2 \right\rceil \cdot 2) +
-	    \bigg[\texttt{Producto\_divide\_venceras}((a-b),(d-c)) +ac +bd\bigg]\cdot \left\lfloor n/2\right\rfloor + 
+	    \bigg[(a-b)(d-c) +ac +bd\bigg] << \left\lfloor n/2\right\rfloor + 
 	    bd \bigg) \cdot \texttt{signo}$
 	  
 	\end{algorithmic}
     \caption{Algoritmo de Karatsuba}
     \label{multiplicacion}
 \end{algorithm}
+%\newpage
+Por ejemplo, para los números \texttt{x = 10011011, y = 10111010}, el producto por el algoritmo:
+\begin{itemize}
+\item Son ambos positivos, luego \texttt{signo=1}
+\item \texttt{(a,c)=(1001,1011)}
+\item \texttt{(b,d)=(1011,1010)}
+\item \texttt{ac=1100011, bd=1101110 y (a-b)(d-c)=10}
+\item Devolver \texttt{ 110001100000000 + (1100011+1101110+10)0000 + 1101110 = 111000010011110}
+\end{itemize} 
 
 \subsection{Análisis de eficiencia}
 El algoritmo convencional de multiplicación de dos enteros de $n$ cifras, tiene una eficiencia de $\mathcal{O}(n^2)$
@@ -237,6 +259,13 @@ q \cdot 3^{\frac{log(n)}{log(2)}}=p \cdot n + q \cdot n^{\frac{log(3)}{log(2)}} 
 
 Por tanto el algoritmo de Karatsuba es mejor asintóticamente hablando que el convencional para efectuar
 el producto de dos números
+
+\subsection{Implementación}
+A continuación, una implementación en Python:
+
+\small
+\texttt{\input{multiplicacion.tex}}
+\normalsize
 
 \section {$K$-ésimo menor elemento de un vector}
   \subsection{Algoritmo}
@@ -356,6 +385,19 @@ el producto de dos números
       \end{equation}
       Lo que nos lleva, por inducción suponiendo $T(n) = cn$, a que el algoritmo es lineal.
       
+\subsection{Implementación}
+A continuación mostramos una implementación en el lenguaje Ruby:
+
+\small
+\texttt{\input{kesimomenor2.tex}}
+\normalsize
+
+y una implementación en Haskell:
+
+\small
+\texttt{\input{kesimo_menor.tex}}
+\normalsize
+
 
 \section {Elemento mayoritario}
 \subsection{Algoritmo}
@@ -407,7 +449,7 @@ Una vez encontrado el candidato a elemento mayoritario mediante el algoritmo, es
 \end{algorithm}
 
 \subsection{Análisis de eficiencia}
-El algoritmo produce una única llamada recursiva con un argumento de tamaño como mucho $\frac{n}{2}$, siendo $n$ el tamaño actual. Por tanto tenemos la recurrencia
+El algoritmo produce una única llamada recursiva con un argumento de tamaño $\frac{n}{2}$ en el peor caso, siendo $n$ el tamaño actual. Por tanto tenemos la recurrencia
 \begin{equation}
 \label{eqmay}
 T(n)=\left\lbrace
@@ -421,11 +463,25 @@ Cambiamos de variable, $m = log_2(n);\ n = 2^m$, y resolvemos la ecuación homog
 $$ x_m-x_{m-1}=0 \Rightarrow x_m = 1^m\ c_1 $$
 Y hallamos una solución particular para la ecuación en recurrencia no homogénea. Por ejemplo, la sucesión $\{0, 2, 6, 14, 30\dots\}=\{2^{m+1}-2\}_{m\ge 0}$ cumple la ecuación. La solución general es por tanto
 $$ x_m = 1^m\ c_1 + 2^{m+1}-2\ \forall m\ge 0$$
-Al deshacer el cambio de variable tenemos:
+Al deshacer el cambio de variable tenemos que el algoritmo de búsqueda del elemento mayoritario es lineal:
 $$ T(n) = c_1 + 2n-2\ \in \mathcal{O}(n)$$
-El algoritmo de búsqueda del elemento mayoritario es lineal.
+
+% % %
+% No sé si añadir todas las implementaciones al final
+% o para cada algoritmo, por ahora la he puesto aquí.
+% Cambiadla si lo veis conveniente
+% -David
+% % %
+\subsection{Implementación}
+A continuación mostramos una implementación en el lenguaje Ruby:
+
+\small
+\texttt{\input{mayoritario.tex}}
+\normalsize
 
 \section {Tornillos y tuercas}
+  \subsection{Algoritmo}
+
     Tenemos dos listas cuyos elementos están emparejados con uno y sólo uno de los elementos de la otra lista.
     
     De nuevo, vamos a utilizar un procedimiento similar al usado por el \textit{Quicksort}.
@@ -462,7 +518,71 @@ El algoritmo de búsqueda del elemento mayoritario es lineal.
     \caption{Tornillos y tuercas}
     \label{TyT}
 \end{algorithm}
+  \subsection{Análisis de eficiencia.}
+      Dada la gran similitud de el algoritmo usado con el algoritmo \textit{Quicksort}, la eficiencia también será similar.
+      
+      En el peor de los casos, tenemos que el pivote(y su pareja) quedan al principio o al final de sus correspondientes listas, dejando una lista vacía y una lista de tamaño $n-1$. En este caso, tenemos una eficiencia cuadrática:
+      
+	  \begin{equation}
+	  	T(n) = 2n + T(0) + T(n-1) = 2n + 1 + T(n-1) = \dots = 2n^2 + n - 1
+	  \end{equation}
+      
+      Por otra parte, el mejor caso consigue dividir la lista por la mitad. En este caso, nos resuelve el problema con eficiencia $\mathcal{O}(nlog(n))$:
+      
+	  \begin{eqnarray*}
+	  \lefteqn{T(n) = 2n + T\bigg(\left\lceil \frac{n-1}{2} \right\rceil\bigg) + T\bigg(\left\lfloor \frac{n-1}{2}\right\rfloor\bigg) \approx 2n + 2T\bigg(\frac{n}{2}\bigg) \approx} \\
+	  && \approx 2n + 2n + 4T\bigg(\frac{n}{4}\bigg) = 4n + 4T\bigg(\frac{n}{4}\bigg)\approx 4n + 2n + 8T\bigg(\frac{n}{8}\bigg) = \\ 
+	  && = 6n + 8T\bigg(\frac{n}{8}\bigg) \approx \dots \approx 2nlog_2(n) + n T(0)
+	  \end{eqnarray*}
+	  
+      El caso medio del algoritmo es $\mathcal{O}(nlog(n)) $. Siguiendo un razonamiento similar al aplicado para calcular el caso medio en \textit{Quicksort}, podemos analizar su eficiencia.
+    
+      El algoritmo realiza dos particiones, una alrededor del pivote y otra alrededor de su pareja, ambas en tiempo $\mathcal{O}(n)$. Ahora, aplicamos el algoritmo
+      en cada una de las dos parejas de listas asociadas resultantes. Cada elemento tendrá la misma posibilidad de ser elegido que los demás, es decir, $\frac{1}{n}$,
+      con $n$, el número de elementos de las listas, por lo que podemos considerar:
+      \begin{equation}
+		T(n) = 2n + \frac{1}{n}\sum_{i=0}^{n-1}\left(T(i) + T(n-1-i) \right)
+      \end{equation}
+      
+      Al evaluarlo en $n-1$, queda:
+      \begin{equation}
+      	T(n-1) = 2(n-1) + \frac{1}{n-1}\sum_{i=0}^{n-2}\left(T(i) + T(n-2-i) \right)
+      \end{equation}
+      
+      Sumando las ecuaciones anteriores multiplicando por $n$ la primera ecuación y por $-(n-1)$ la otra, obtenemos:
+      \begin{equation}
+        nT(n) - (n-1)T(n-1) = 2n^2 + 2\sum^{n-1}_{i=1} T(i) - 2(n-1)^2 - 2\sum_{i=0}^{n-2}T(i)
+      \end{equation}
+      Simplificando, nos quedaría:
+	  \begin{equation}
+	    nT(n) - (n-1)T(n-1) = 4n-2 + 2(T(n-1) - T(0)) = 4n - 4 + 2T(n-1) 
+	  \end{equation}
+	  \begin{equation}
+	    \frac{T(n)}{n+1} = \frac{T(n-1)}{n} + \frac{4n-4}{n(n+1)}
+	  \end{equation}
+	  	  
+	  %Hasta aquí, estoy seguro de que ésta es la forma de resolverlo
+	  
+      Ahora consideramos $S(n) = \frac{T(n)}{n+1}$, y obtenemos la ecuación:
+      \begin{equation}
+        S(n) = S(n-1) + \frac{4}{n(n+1)}
+      \end{equation}
+      Desarrollando, obtenemos:
+      \begin{equation}
+        S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i(i-1)}
+      \end{equation}
+      
+      Claramente, esto es $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\
+      $T(n) = S(n) (n+1) = \mathcal{O}(log(n)) (n+1) = \mathcal{O}(nlog(n))$
 
+      \subsection{Implementación}
+      Implementación en Ruby:
+
+      \small
+      \texttt{\input{tornillos.tex}}
+      \normalsize
+      
+      
 \section {Compraventa de acciones}
 \subsection{Algoritmo}
 	% (Comentario Mario)
@@ -475,7 +595,8 @@ El algoritmo de búsqueda del elemento mayoritario es lineal.
 	
 	Como caso base, si el array tiene longitud 1, devolvemos la posición del elemento. 
 	
-	Si el array tiene más de un elemento, lo dividimos en dos mitades. Se nos presentan tres disyuntivas: 
+	Si el array tiene más de un elemento, lo dividimos en dos mitades. Se nos presentan tres disyuntivas:
+	% Técnicamente es *una* disyuntiva con tres situaciones, no? -David
 	\begin{itemize}
 		\item Los valores minimal\footnote[1]{Llamamos minimal al valor al que compramos las acciones. No debe confundirse con el mínimo del array. De igual forma, llamamos maximal al valor al que vendemos las acciones, que no debe confundirse con el máximo.}
 			 y maximal están en la primera mitad.

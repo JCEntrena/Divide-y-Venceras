@@ -1,0 +1,32 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ python}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ -*-\ coding:\ utf-8\ -*-}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Black}{MultiplicaDV}}\ \textcolor{BrickRed}{(}x\textcolor{BrickRed}{,}y\textcolor{BrickRed}{):} \\
+\mbox{}\ \ \ \ signo\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{1}\ \textbf{\textcolor{Blue}{if}}\ x\textcolor{BrickRed}{\textless{}}\textcolor{Purple}{0}\ \textbf{\textcolor{Blue}{and}}\ y\textcolor{BrickRed}{\textless{}}\textcolor{Purple}{0}\ \textbf{\textcolor{Blue}{or}}\ x\textcolor{BrickRed}{\textgreater{}=}\textcolor{Purple}{0}\ \textbf{\textcolor{Blue}{and}}\ y\textcolor{BrickRed}{\textgreater{}=}\textcolor{Purple}{0}\ \textbf{\textcolor{Blue}{else}}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1} \\
+\mbox{}\ \ \ \ x\textcolor{BrickRed}{,}y\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{abs}}\textcolor{BrickRed}{(}x\textcolor{BrickRed}{),}\textbf{\textcolor{Black}{abs}}\textcolor{BrickRed}{(}y\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ length\ \textcolor{BrickRed}{=}\ x\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{bit$\_$length}}\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{if}}\ x\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{bit$\_$length}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{\textgreater{}}\ y\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{bit$\_$length}}\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{else}}\ y\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{bit$\_$length}}\textcolor{BrickRed}{()} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}length\ \textcolor{BrickRed}{\textless{}}\ \textcolor{Purple}{2}\textcolor{BrickRed}{):} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ x\textcolor{BrickRed}{*}y\textcolor{BrickRed}{*}signo \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{else}}\textcolor{BrickRed}{:} \\
+\mbox{}\ \ \ \ \ \ \ \ a\ \textcolor{BrickRed}{=}\ x\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ length\textcolor{BrickRed}{/}\textcolor{Purple}{2} \\
+\mbox{}\ \ \ \ \ \ \ \ b\ \textcolor{BrickRed}{=}\ x\ \textcolor{BrickRed}{\%}\ \textcolor{BrickRed}{(}\textcolor{Purple}{1}\ \textcolor{BrickRed}{\textless{}\textless{}}\ length\textcolor{BrickRed}{/}\textcolor{Purple}{2}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ c\ \textcolor{BrickRed}{=}\ y\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ length\textcolor{BrickRed}{/}\textcolor{Purple}{2} \\
+\mbox{}\ \ \ \ \ \ \ \ d\ \textcolor{BrickRed}{=}\ y\ \textcolor{BrickRed}{\%}\ \textcolor{BrickRed}{(}\textcolor{Purple}{1}\ \textcolor{BrickRed}{\textless{}\textless{}}\ length\textcolor{BrickRed}{/}\textcolor{Purple}{2}\textcolor{BrickRed}{)}\ \  \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ ac\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{MultiplicaDV}}\ \textcolor{BrickRed}{(}a\textcolor{BrickRed}{,}c\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ bd\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{MultiplicaDV}}\ \textcolor{BrickRed}{(}b\textcolor{BrickRed}{,}d\textcolor{BrickRed}{)} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \ \textcolor{BrickRed}{((}ac\ \textcolor{BrickRed}{\textless{}\textless{}}\ \textcolor{BrickRed}{(}length\textcolor{BrickRed}{/}\textcolor{Purple}{2}\textcolor{BrickRed}{*}\textcolor{Purple}{2}\textcolor{BrickRed}{))}\ \textcolor{BrickRed}{+}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{((}\textbf{\textcolor{Black}{MultiplicaDV}}\textcolor{BrickRed}{(}a\textcolor{BrickRed}{-}b\textcolor{BrickRed}{,}d\textcolor{BrickRed}{-}c\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{+}\ ac\ \textcolor{BrickRed}{+}\ bd\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{\textless{}\textless{}}\ length\textcolor{BrickRed}{/}\textcolor{Purple}{2}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{+} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bd\textcolor{BrickRed}{)*}signo \\
+\mbox{}\ \ \ \  \\
+\mbox{} \\
+\mbox{}x\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{input}}\ \textcolor{BrickRed}{(}\texttt{\textcolor{Red}{"{}Primer\ número:\ "{}}}\textcolor{BrickRed}{)} \\
+\mbox{}y\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{input}}\ \textcolor{BrickRed}{(}\texttt{\textcolor{Red}{"{}Segundo\ número:\ "{}}}\textcolor{BrickRed}{)} \\
+\mbox{}\textit{\textcolor{Brown}{\#x\ =\ 0b10011011}} \\
+\mbox{}\textit{\textcolor{Brown}{\#y\ =\ 0b10111010}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{print}}\ \texttt{\textcolor{Red}{"{}Resultado:\ "{}}}\textcolor{BrickRed}{,}\ \textbf{\textcolor{Black}{MultiplicaDV}}\textcolor{BrickRed}{(}x\textcolor{BrickRed}{,}y\textcolor{BrickRed}{)}
