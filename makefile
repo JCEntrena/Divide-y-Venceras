@@ -21,6 +21,9 @@ $(BIN)/%: $(SRC)/%.cpp
 $(TEX)/%.tex: $(SRC)/%.rb
 	source-highlight -f latexcolor -i $< -o $@
 
+$(TEX)/%.tex: $(SRC)/%.hs
+	source-highlight -f latexcolor -i $< -o $@
+
 # Limpieza de los ejecutables
 clean:
 	rm $(BIN)/*
