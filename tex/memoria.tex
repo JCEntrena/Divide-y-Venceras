@@ -499,20 +499,21 @@ A continuación mostramos una implementación en el lenguaje Ruby:
 	\begin{algorithmic}[1]
 	  \REQUIRE \ \\
 	    \texttt{a, b, listas emparejadas de $n$ números}\\
-	  \IF{$n$==0}
+	  \IF{$n$=0}
 	    \RETURN {\texttt{[]}}
 	  \ELSE
 	    \STATE{\texttt{pivote$\leftarrow$ a[0]}}
 	    \STATE{Definimos:\\
-	      \texttt{pareja}=$\{y\in b : y=pivote\}$, que será único por las condiciones del problema\\
+	      \texttt{pareja}=$\{y\in b : y=pivote\}$\\
+	      \qquad (será único por las condiciones del problema)\\
 	      \texttt{menores de b}=$\{y\in b : y<pivote\}$\\
 	      \texttt{mayores de b}=$\{y\in b : y>pivote\}$\\
 	      \texttt{menores de a}=$\{x\in a : x<pareja\}$\\
 	      \texttt{mayores de a}=$\{x\in a : x>pareja\}$\\}
-	  \IF{\#\texttt{menores de b} != 0}
+	  \IF{\#\texttt{menores de b} $\neq$ 0}
 	    \STATE{\texttt{Ordenar(menores de b, menores de a)}}
 	  \ENDIF \\
-	  \IF{\#\texttt{mayores de b} != 0}
+	  \IF{\#\texttt{mayores de b} $\neq$ 0}
 	    \STATE{\texttt{Ordenar(mayores de b, mayores de a)}}
 	  \ENDIF \\
 	  
@@ -583,8 +584,13 @@ A continuación mostramos una implementación en el lenguaje Ruby:
         S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i}
       \end{equation}
       
+<<<<<<< HEAD
       Claramente, $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\
       $T(n) = S(n)(n+1) + 4 = \mathcal{O}(log(n)) (n+1) + 4 = \mathcal{O}(nlog(n))$
+=======
+      Claramente, esto es $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\\
+      $$T(n) = S(n) (n+1) = \mathcal{O}(log(n)) (n+1) = \mathcal{O}(nlog(n))$$
+>>>>>>> 0487c6b3a60b095953098f6d09f55a7023bae03f
 
       \subsection{Implementación}
       Implementación en Ruby:
@@ -694,7 +700,9 @@ Podemos apuntar que, como esta recurrencia es la misma que la obtenida en el alg
 	\end{algorithm}
 	
 \subsection{Análisis de eficiencia}
-El nuevo algoritmo sigue teniendo dos llamadas recursivas con un argumento de tamaño $\frac{n}{2}$, siendo $n$ el tamaño actual. Sin embargo, el nuevo calculo del mínimo y del máximo se hace entre dos números, lo que lo hace de tiempo constante. Nuestro caso base sigue siendo de tiempo constante, lo que nos da la nueva ecuación en recurrencias: 
+El nuevo algoritmo sigue teniendo dos llamadas recursivas con un argumento de tamaño $\frac{n}{2}$, siendo $n$ el tamaño actual. Sin embargo, el nuevo cálculo 
+del mínimo y del máximo se hace entre dos números, lo que lo hace de tiempo constante. Nuestro caso base sigue siendo de tiempo constante, lo que nos da la nueva 
+ecuación en recurrencias: 
 \begin{equation}
 T(n)=\left\lbrace
 	    \begin{array}{lr}
@@ -709,5 +717,13 @@ Hallamos una solución particular para la ecuación en recurrencia no homogénea
 $$ x_m = 2^m\ c_1 + 2^{m}-1\ \forall m\ge 0$$
 Al deshacer el cambio de variable tenemos:
 $$ T(n) = nc_1 + n-1 = n(c_1 + 1)-1\ \in \mathcal{O}(n)$$
+	
+	
+\subsection{Implementación}
+Presentamos la siguiente implementación en Ruby: \\
+  \small
+    \texttt{\input{compraventa.tex}}
+  \normalsize
+	
 	
 \end{document}
