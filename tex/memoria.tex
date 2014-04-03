@@ -411,9 +411,13 @@ Para ello, utilizaremos la siguiente estrategia:
 \item Creamos una nueva lista con los elementos correspondientes a cada pareja de valores repetidos.
 \end{itemize}
 
-Efectivamente, se justifica mediante el principio del palomar que habrá al menos una pareja que contenga al elemento mayoritario repetido (excepto en el caso de tamaño impar y elemento mayoritario en la última posición, donde podría no haber parejas de elementos repetidos), y podemos ver que cada pareja de elementos repetidos distintos del mayoritario provocará la existencia de una pareja con el mayoritario.
+Efectivamente, se justifica mediante el principio del palomar que habrá al menos una pareja que contenga al elemento mayoritario
+repetido (excepto en el caso de tamaño impar y elemento mayoritario en la última posición, donde podría no haber parejas de elementos 
+repetidos), y podemos ver que cada pareja de elementos repetidos distintos del mayoritario provocará la existencia de una pareja con el mayoritario.
 
-Una vez encontrado el candidato a elemento mayoritario mediante el algoritmo, es necesario comprobar si realmente lo es, ya que la condición que tenemos es necesaria pero no suficiente. Además, si el tamaño del vector es impar, la estrategia no considerará el último elemento (ya que no entra en ninguna pareja), luego habrá que comprobarlo después. Estas operaciones se realizan trivialmente en $\mathcal{O}(n)$.
+Una vez encontrado el candidato a elemento mayoritario mediante el algoritmo, es necesario comprobar si realmente lo es, ya que la 
+condición que tenemos es necesaria pero no suficiente. Además, si el tamaño del vector es impar, la estrategia no considerará el 
+último elemento (ya que no entra en ninguna pareja), luego habrá que comprobarlo después. Estas operaciones se realizan trivialmente en $\mathcal{O}(n)$.
 
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
@@ -461,7 +465,8 @@ T(n)=\left\lbrace
 \end{equation} 
 Cambiamos de variable, $m = log_2(n);\ n = 2^m$, y resolvemos la ecuación homogénea asociada:
 $$ x_m-x_{m-1}=0 \Rightarrow x_m = 1^m\ c_1 $$
-Y hallamos una solución particular para la ecuación en recurrencia no homogénea. Por ejemplo, la sucesión $\{0, 2, 6, 14, 30\dots\}=\{2^{m+1}-2\}_{m\ge 0}$ cumple la ecuación. La solución general es por tanto
+Y hallamos una solución particular para la ecuación en recurrencia no homogénea. Por ejemplo, la sucesión $\{0, 2, 6, 14, 30\dots\}=\{2^{m+1}-2\}_{m\ge 0}$ 
+cumple la ecuación. La solución general es por tanto
 $$ x_m = 1^m\ c_1 + 2^{m+1}-2\ \forall m\ge 0$$
 Al deshacer el cambio de variable tenemos que el algoritmo de búsqueda del elemento mayoritario es lineal:
 $$ T(n) = c_1 + 2n-2\ \in \mathcal{O}(n)$$
@@ -490,7 +495,8 @@ A continuación mostramos una implementación en el lenguaje Ruby:
     
     Y utilizando la pareja como pivote, dividimos la primera lista en elementos menores y mayores a la pareja(y, por tanto, al elemento que cogimos antes).
     
-    Una vez tenemos la separación en dos partes de las dos listas, procedemos a ordenar cada una de las mitades con la mitad correspondiente de la otra lista(elementos menores al pivote con elementos menores a su pareja, y elementos mayores al pivote con elementos mayores a su pareja).
+    Una vez tenemos la separación en dos partes de las dos listas, procedemos a ordenar cada una de las mitades con la mitad 
+    correspondiente de la otra lista(elementos menores al pivote con elementos menores a su pareja, y elementos mayores al pivote con elementos mayores a su pareja).
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
 	  \REQUIRE \ \\
@@ -546,26 +552,30 @@ A continuación mostramos una implementación en el lenguaje Ruby:
       
       Al evaluarlo en $n-1$, queda:
       \begin{equation}
-      	T(n-1) = 2(n-1) + \frac{1}{n-1}\sum_{i=0}^{n-2}\left(T(i) + T((n-2-i) \right)
+      	T(n-1) = 2(n-1) + \frac{1}{n-1}\sum_{i=0}^{n-2}\left(T(i) + T(n-2-i) \right)
       \end{equation}
+      
       Sumando las ecuaciones anteriores multiplicando por $n$ la primera ecuación y por $-(n-1)$ la otra, obtenemos:
       \begin{equation}
         nT(n) - (n-1)T(n-1) = 2n^2 + 2\sum^{n-1}_{i=1} T(i) - 2(n-1)^2 - 2\sum_{i=0}^{n-2}T(i)
       \end{equation}
       Simplificando, nos quedaría:
 	  \begin{equation}
-	    nT(n) - (n-1)T(n-1) = 4n-2 + 2(T(n-1) - T(0)) = 4n + 2T(n-1) 
+	    nT(n) - (n-1)T(n-1) = 4n-2 + 2(T(n-1) - T(0)) = 4n - 4 + 2T(n-1) 
 	  \end{equation}
 	  \begin{equation}
-	    \frac{T(n)}{n+1} = \frac{T(n-1)}{n} + 4
+	    \frac{T(n)}{n+1} = \frac{T(n-1)}{n} + \frac{4n-4}{n(n+1)}
 	  \end{equation}
+	  	  
+	  %Hasta aquí, estoy seguro de que ésta es la forma de resolverlo
+	  
       Ahora consideramos $S(n) = \frac{T(n)}{n+1}$, y obtenemos la ecuación:
       \begin{equation}
-        S(n) = S(n-1) + \frac{4}{n+1}
+        S(n) = S(n-1) + \frac{4}{n(n+1)}
       \end{equation}
       Desarrollando, obtenemos:
       \begin{equation}
-        S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i}
+        S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i(i-1)}
       \end{equation}
       
       Claramente, esto es $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\

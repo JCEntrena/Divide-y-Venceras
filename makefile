@@ -8,7 +8,7 @@ DATA=./data
 PLOT=./plots
 FIT=./regressionPlots
 TEX=./tex
-FLAGS=-std=c++0x -Wall
+FLAGS=-std=c++0x -Wall -fopenmp
 
 # make all: Compilar todos los programas 
 all: $(patsubst $(SRC)/%.cpp, $(BIN)/%, $(wildcard $(SRC)/*.cpp))
