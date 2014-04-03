@@ -499,20 +499,21 @@ A continuación mostramos una implementación en el lenguaje Ruby:
 	\begin{algorithmic}[1]
 	  \REQUIRE \ \\
 	    \texttt{a, b, listas emparejadas de $n$ números}\\
-	  \IF{$n$==0}
+	  \IF{$n$=0}
 	    \RETURN {\texttt{[]}}
 	  \ELSE
 	    \STATE{\texttt{pivote$\leftarrow$ a[0]}}
 	    \STATE{Definimos:\\
-	      \texttt{pareja}=$\{y\in b : y=pivote\}$, que será único por las condiciones del problema\\
+	      \texttt{pareja}=$\{y\in b : y=pivote\}$\\
+	      \qquad (será único por las condiciones del problema)\\
 	      \texttt{menores de b}=$\{y\in b : y<pivote\}$\\
 	      \texttt{mayores de b}=$\{y\in b : y>pivote\}$\\
 	      \texttt{menores de a}=$\{x\in a : x<pareja\}$\\
 	      \texttt{mayores de a}=$\{x\in a : x>pareja\}$\\}
-	  \IF{\#\texttt{menores de b} != 0}
+	  \IF{\#\texttt{menores de b} $\neq$ 0}
 	    \STATE{\texttt{Ordenar(menores de b, menores de a)}}
 	  \ENDIF \\
-	  \IF{\#\texttt{mayores de b} != 0}
+	  \IF{\#\texttt{mayores de b} $\neq$ 0}
 	    \STATE{\texttt{Ordenar(mayores de b, mayores de a)}}
 	  \ENDIF \\
 	  
@@ -576,8 +577,8 @@ A continuación mostramos una implementación en el lenguaje Ruby:
         S(n) = 4 \sum^{n+1}_{i=1} \frac{1}{i(i-1)}
       \end{equation}
       
-      Claramente, esto es $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\
-      $T(n) = S(n) (n+1) = \mathcal{O}(log(n)) (n+1) = \mathcal{O}(nlog(n))$
+      Claramente, esto es $S(n)$ es $\mathcal{O}(log(n))$. Entonces: \\\
+      $$T(n) = S(n) (n+1) = \mathcal{O}(log(n)) (n+1) = \mathcal{O}(nlog(n))$$
 
       \subsection{Implementación}
       Implementación en Ruby:
