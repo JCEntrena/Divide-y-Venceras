@@ -1,4 +1,4 @@
-%%%
+% %%%
 % Modificación de una plantilla de Latex para adaptarla al castellano.
 %%%
 
@@ -179,18 +179,27 @@ de los bits de un número entero $x$.
 	  \IF{\texttt{longitud} $<$ 2}
 	    \RETURN{$x\cdot y \cdot \texttt{signo}$}
 	  \ELSE
-	    \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}\\
-		 \texttt{(b,d):= $\left\lfloor \frac{n}{2}\right\rfloor$} bits inferiores de \texttt{(x,y)}}
-	    \STATE{Calculamos \texttt{a$\cdot$c} y \texttt{b$\cdot$d} llamando recursivamente al algoritmo}
+	    \STATE{\texttt{(a,c):= $\left\lceil \frac{n}{2}\right\rceil$} bits superiores de \texttt{(x,y)}}
+	    \STATE{\texttt{(b,d):= $\left\lfloor \frac{n}{2}\right\rfloor$} bits inferiores de \texttt{(x,y)}}
+	    \STATE{Calculamos \texttt{a$\cdot$c}, \texttt{b$\cdot$d} y \texttt{(a-b)$\cdot$(d-c)} llamando recursivamente al algoritmo}
 	  \ENDIF \\\
 	  \RETURN\\\ $\bigg( ac << (\left\lceil n/2 \right\rceil \cdot 2) +
-	    \bigg[\texttt{Producto\_divide\_venceras}((a-b),(d-c)) +ac +bd\bigg]\cdot \left\lfloor n/2\right\rfloor + 
+	    \bigg[(a-b)(d-c) +ac +bd\bigg] << \left\lfloor n/2\right\rfloor + 
 	    bd \bigg) \cdot \texttt{signo}$
 	  
 	\end{algorithmic}
     \caption{Algoritmo de Karatsuba}
     \label{multiplicacion}
 \end{algorithm}
+\newpage
+Por ejemplo, para los números \texttt{x = 10011011, y = 10111010}, el producto por el algoritmo:
+\begin{itemize}
+\item Son ambos positivos, luego \texttt{signo=1}
+\item \texttt{(a,c)=(1001,1011)}
+\item \texttt{(b,d)=(1011,1010)}
+\item \texttt{ac=1100011, bd=1101110 y (a-b)(d-c)=10}
+\item Devolver \texttt{ 110001100000000 + (1100011+1101110+10)0000 + 1101110 = 111000010011110}
+\end{itemize} 
 
 \subsection{Análisis de eficiencia}
 El algoritmo convencional de multiplicación de dos enteros de $n$ cifras, tiene una eficiencia de $\mathcal{O}(n^2)$
@@ -237,6 +246,13 @@ q \cdot 3^{\frac{log(n)}{log(2)}}=p \cdot n + q \cdot n^{\frac{log(3)}{log(2)}} 
 
 Por tanto el algoritmo de Karatsuba es mejor asintóticamente hablando que el convencional para efectuar
 el producto de dos números
+
+\subsection{Implementación}
+A continuación, una implementación en Python:
+
+\small
+\texttt{\input{multiplicacion.tex}}
+\normalsize
 
 \section {$K$-ésimo menor elemento de un vector}
   \subsection{Algoritmo}
