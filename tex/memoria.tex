@@ -152,8 +152,15 @@ Para un procesador vectorial (SIMD), de nuevo encontramos que el algoritmo itera
 Únicamente encontraríamos mejora si el computador fuese de tipo MIMD, ya que en dicho caso podríamos crear
 varias hebras y que cada una de ellas se ocupara de atender una llamada a la recurrencia en un procesador distinto.
 
+\subsection{Implementación}
+A continuación mostramos una implementación en el lenguaje Ruby:
 
-\section {Multiplicación de números grandes (adaptado a binario)}
+\small
+\texttt{\input{suma.tex}}
+\normalsize
+
+\section {Multiplicación de números grandes (adaptado a 
+binario)}
 \subsection{Algoritmo}
 Llamamos longitud en bits de un número entero positivo $x=x_{n}x_{n-1}\ldots x_1)_b \quad \\ x_i \in \{0,1\}$
 a $\max\{i\in \{1\ldots n\} : x_i = 1\}$
@@ -372,6 +379,19 @@ A continuación, una implementación en Python:
       \end{equation}
       Lo que nos lleva, por inducción suponiendo $T(n) = cn$, a que el algoritmo es lineal.
       
+\subsection{Implementación}
+A continuación mostramos una implementación en el lenguaje Ruby:
+
+\small
+\texttt{\input{kesimomenor2.tex}}
+\normalsize
+
+y una implementación en Haskell:
+
+\small
+\texttt{\input{kesimo_menor.tex}}
+\normalsize
+
 
 \section {Elemento mayoritario}
 \subsection{Algoritmo}
