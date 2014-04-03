@@ -688,7 +688,9 @@ Podemos apuntar que, como esta recurrencia es la misma que la obtenida en el alg
 	\end{algorithm}
 	
 \subsection{Análisis de eficiencia}
-El nuevo algoritmo sigue teniendo dos llamadas recursivas con un argumento de tamaño $\frac{n}{2}$, siendo $n$ el tamaño actual. Sin embargo, el nuevo calculo del mínimo y del máximo se hace entre dos números, lo que lo hace de tiempo constante. Nuestro caso base sigue siendo de tiempo constante, lo que nos da la nueva ecuación en recurrencias: 
+El nuevo algoritmo sigue teniendo dos llamadas recursivas con un argumento de tamaño $\frac{n}{2}$, siendo $n$ el tamaño actual. Sin embargo, el nuevo cálculo 
+del mínimo y del máximo se hace entre dos números, lo que lo hace de tiempo constante. Nuestro caso base sigue siendo de tiempo constante, lo que nos da la nueva 
+ecuación en recurrencias: 
 \begin{equation}
 T(n)=\left\lbrace
 	    \begin{array}{lr}
@@ -703,5 +705,13 @@ Hallamos una solución particular para la ecuación en recurrencia no homogénea
 $$ x_m = 2^m\ c_1 + 2^{m}-1\ \forall m\ge 0$$
 Al deshacer el cambio de variable tenemos:
 $$ T(n) = nc_1 + n-1 = n(c_1 + 1)-1\ \in \mathcal{O}(n)$$
+	
+	
+\subsection{Implementación}
+Presentamos la siguiente implementación en Ruby:
+      \small
+      \texttt{\input{compraventa.tex}}
+      \normalsize
+	
 	
 \end{document}
