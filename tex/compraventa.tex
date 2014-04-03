@@ -1,0 +1,71 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ ruby}} \\
+\mbox{}\textit{\textcolor{Brown}{\#encoding\ utf8}} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Compraventa.\ Este\ algoritmo\ halla\ la\ mayor\ diferencia\ b-a\ entre\ elementos\ de\ un\ array,\ con\ b\ más\ a\ la\ derecha\ que\ a.\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Calcularemos\ recursivamente\ el\ mínimo\ del\ array\ y\ las\ posiciones\ que\ verifican\ la\ mayor\ diferencia.\ }} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ La\ función\ devuelve\ cuatro\ posiciones:\ [Posición\ de\ a,\ posición\ de\ b,\ posición\ del\ mínimo\ del\ array,\ posición\ del\ máximo\ del\ array]}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{class}}\ Array \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{def}}\ compraventa \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Caso\ base:\ Tenemos\ un\ array\ de\ tamaño\ 1.\ Todas\ las\ posiciones\ coinciden\ con\ la\ inicial.\ }} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{,}\ \textcolor{Purple}{0}\textcolor{BrickRed}{,}\ \textcolor{Purple}{0}\textcolor{BrickRed}{,}\ \textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textbf{\textcolor{Blue}{if}}\ size\ \textcolor{BrickRed}{==}\ \textcolor{Purple}{1}\ \ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ De\ no\ ser\ así,\ llamamos\ recurvivamente\ a\ la\ función\ con\ las\ dos\ mitades\ izquierda\ y\ derecha.\ \ \ \ \ }} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ minimal$\_$izquierda\textcolor{BrickRed}{,}\ maximal$\_$izquierda\textcolor{BrickRed}{,}\ minimo$\_$izquierda\textcolor{BrickRed}{,}\ maximo$\_$izquierda\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{0}\ \textcolor{BrickRed}{..}\ size\textcolor{BrickRed}{/}\textcolor{Purple}{2}\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{].}compraventa\  \\
+\mbox{}\ \ \ \ \ \ \ \ minimal$\_$derecha\textcolor{BrickRed}{,}\ maximal$\_$derecha\textcolor{BrickRed}{,}\ minimo$\_$derecha\textcolor{BrickRed}{,}\ maximo$\_$derecha\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}size\textcolor{BrickRed}{/}\textcolor{Purple}{2}\ \textcolor{BrickRed}{..}\ size\ \textcolor{BrickRed}{-}\ \textcolor{Purple}{1}\textcolor{BrickRed}{].}compraventa \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Ajustamos\ las\ posiciones\ de\ la\ parte\ derecha\ para\ que\ se\ refieran\ al\ array\ total,\ y\ no\ a\ la\ mitad\ derecha.\ }} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ minimal$\_$derecha\ \textcolor{BrickRed}{+=}\ size\textcolor{BrickRed}{/}\textcolor{Purple}{2} \\
+\mbox{}\ \ \ \ \ \ \ \ maximal$\_$derecha\ \textcolor{BrickRed}{+=}\ size\textcolor{BrickRed}{/}\textcolor{Purple}{2} \\
+\mbox{}\ \ \ \ \ \ \ \ minimo$\_$derecha\ \textcolor{BrickRed}{+=}\ size\textcolor{BrickRed}{/}\textcolor{Purple}{2} \\
+\mbox{}\ \ \ \ \ \ \ \ maximo$\_$derecha\ \textcolor{BrickRed}{+=}\ size\textcolor{BrickRed}{/}\textcolor{Purple}{2} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Comprobamos\ que\ pareja\ de\ valores\ nos\ da\ la\ mayor\ ganacia:\ }} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ ·\ La\ pareja\ de\ valores\ de\ la\ parte\ izquierda}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ ·\ La\ pareja\ de\ valores\ de\ la\ parte\ derecha}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ ·\ El\ máximo\ de\ la\ parte\ derecha\ y\ el\ mínimo\ de\ la\ izquierda}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Ajustaremos\ los\ valores\ minimales\ dependiendo\ de\ cual\ sea\ la\ mejor\ de\ las\ parejas.\ }} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}maximal$\_$izquierda\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{-}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}minimal$\_$izquierda\textcolor{BrickRed}{))}\ \textcolor{BrickRed}{\textless{}}\ \textcolor{BrickRed}{(}\textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}maximal$\_$derecha\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{-}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}minimal$\_$derecha\textcolor{BrickRed}{))} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ minimal\ \textcolor{BrickRed}{=}\ minimal$\_$derecha \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ maximal\ \textcolor{BrickRed}{=}\ maximal$\_$derecha \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{else}}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ minimal\ \textcolor{BrickRed}{=}\ minimal$\_$izquierda \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ maximal\ \textcolor{BrickRed}{=}\ maximal$\_$izquierda \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}}\  \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}maximal\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{-}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}minimal\textcolor{BrickRed}{))}\ \textcolor{BrickRed}{\textless{}}\ \textcolor{BrickRed}{(}\textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}maximo$\_$derecha\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{-}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}minimo$\_$izquierda\textcolor{BrickRed}{))} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ maximal\ \textcolor{BrickRed}{=}\ maximo$\_$derecha \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ minimal\ \textcolor{BrickRed}{=}\ minimo$\_$izquierda \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Recalculamos\ el\ mínimo\ y\ máximo.\ \ }} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ minimo\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}minimo$\_$izquierda\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{\textless{}}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}minimo$\_$derecha\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{?}\ minimo$\_$izquierda\ \textcolor{BrickRed}{:}\ minimo$\_$derecha \\
+\mbox{}\ \ \ \ \ \ \ \ maximo\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}maximo$\_$izquierda\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{\textgreater{}}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}at\textcolor{BrickRed}{(}maximo$\_$derecha\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{?}\ maximo$\_$izquierda\ \textcolor{BrickRed}{:}\ maximo$\_$derecha \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{[}minimal\textcolor{BrickRed}{,}\ maximal\textcolor{BrickRed}{,}\ minimo\textcolor{BrickRed}{,}\ maximo\textcolor{BrickRed}{]}\  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{end}}\  \\
+\mbox{}\textbf{\textcolor{Blue}{end}}\  \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Valores\ que\ se\ muestran\ en\ pantalla:\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ -\ Momento\ de\ compra\ (posición\ del\ elemento\ minimal).\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ -\ Momento\ de\ venta\ (posición\ del\ elemento\ maximal).\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ -\ Posición\ del\ mínimo\ del\ vector\ (irrelevante).\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ -\ Posición\ del\ máximo\ del\ vector\ (irrelevante).\ }} \\
+\mbox{} \\
+\mbox{}puts\ \textcolor{BrickRed}{[}\textcolor{Purple}{40}\textcolor{BrickRed}{,}\textcolor{Purple}{10}\textcolor{BrickRed}{,}\textcolor{Purple}{50}\textcolor{BrickRed}{,}\textcolor{Purple}{3}\textcolor{BrickRed}{,}\textcolor{Purple}{45}\textcolor{BrickRed}{,}\textcolor{Purple}{12}\textcolor{BrickRed}{].}compraventa \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}
