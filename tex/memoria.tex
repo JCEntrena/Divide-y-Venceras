@@ -153,10 +153,16 @@ Para un procesador vectorial (SIMD), de nuevo encontramos que el algoritmo itera
 varias hebras y que cada una de ellas se ocupara de atender una llamada a la recurrencia en un procesador distinto.
 
 \subsection{Implementación}
-A continuación mostramos una implementación en el lenguaje Ruby:
+Implementación en Ruby:
 
 \small
 \texttt{\input{suma.tex}}
+\normalsize
+
+Implementación en Haskell:
+
+\small
+\texttt{\input{suma2.tex}}
 \normalsize
 
 \section {Multiplicación de números grandes (adaptado a 
@@ -198,7 +204,7 @@ de los bits de un número entero $x$.
     \caption{Algoritmo de Karatsuba}
     \label{multiplicacion}
 \end{algorithm}
-\newpage
+%\newpage
 Por ejemplo, para los números \texttt{x = 10011011, y = 10111010}, el producto por el algoritmo:
 \begin{itemize}
 \item Son ambos positivos, luego \texttt{signo=1}
